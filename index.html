@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academia Hub | GPA & CGPA Calculator</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- html2pdf Library for high-fidelity PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5IfS51RRXXC562qxUpd5OhqYzECvyOIEMClcxgYSygX2qm4clAqYGgTFWgURm7jGsCwClcodg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <!-- Background Decorative Blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="logo-icon">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+          <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
+        </svg>
+        <div class="logo-text">
+          <h1>Academia <span>Hub</span></h1>
+          <p>College GPA & CGPA Hub</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="btn-icon" aria-label="Toggle Theme" title="Toggle Theme">
+          <!-- Light Mode Icon (Sun) -->
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <!-- Dark Mode Icon (Moon) -->
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Student Profile Card (Prefills in PDF transcript) -->
+    <section class="profile-card glass-card">
+      <div class="card-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="section-icon">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <h2>Student Profile Information</h2>
+      </div>
+      <div class="profile-grid">
+        <div class="input-group">
+          <label for="student-name">Full Name</label>
+          <input type="text" id="student-name" placeholder="John Doe" value="John Doe">
+        </div>
+        <div class="input-group">
+          <label for="student-roll">Register / Roll Number</label>
+          <input type="text" id="student-roll" placeholder="E.g., 211221104001">
+        </div>
+        <div class="input-group">
+          <label for="student-reg">Regulation</label>
+          <select id="student-reg">
+            <option value="2021" selected>Regulation 2021</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="student-dept">Department</label>
+          <select id="student-dept">
+            <option value="cse" selected>Computer Science & Engineering (CSE)</option>
+            <option value="cyber">CSE - Cyber Security (Cybersecurity)</option>
+            <option value="aids">Artificial Intelligence & Data Science (AIDS)</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="student-college">Institution / College Name</label>
+          <input type="text" id="student-college" placeholder="E.g., Anna University" value="Anna University Affiliated College">
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculator Main Layout Grid -->
+    <main class="calculator-grid">
+      <!-- Calculators Section (Left Side) -->
+      <section class="calculators-container">
+        <!-- Navigation Tabs -->
+        <div class="tabs-container">
+          <button class="tab-btn active" data-tab="gpa">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="tab-icon">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+              <path d="M6 6h10M6 10h10"/>
+            </svg>
+            GPA Calculator
+          </button>
+          <button class="tab-btn" data-tab="cgpa">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="tab-icon">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+            CGPA Calculator
+          </button>
+          <div class="tab-indicator"></div>
+        </div>
+
+        <!-- GPA Calculator Pane -->
+        <div id="gpa-pane" class="tab-pane active">
+          <div class="pane-header">
+            <div class="pane-title">
+              <h3>Semester Course Details</h3>
+              <p>Calculate your Semester GPA by filling subject details below</p>
+            </div>
+            <!-- Preset Loader Dropdown -->
+            <div class="preset-selector-group">
+              <label for="semester-preset">Load Semester Syllabus Preset</label>
+              <select id="semester-preset" class="select-preset">
+                <option value="" disabled selected>-- Select Semester --</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table id="gpa-table">
+              <thead>
+                <tr>
+                  <th style="width: 20%">Subject Code</th>
+                  <th style="width: 45%">Subject Name</th>
+                  <th style="width: 15%">Credits</th>
+                  <th style="width: 15%">Grade</th>
+                  <th style="width: 5%"></th>
+                </tr>
+              </thead>
+              <tbody id="gpa-table-body">
+                <!-- Rows injected dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="controls-row">
+            <button id="gpa-add-row" class="btn btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="btn-icon-svg">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+              Add Subject
+            </button>
+            <div class="action-buttons-group">
+              <button id="gpa-reset" class="btn btn-outline">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-svg">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                </svg>
+                Reset GPA Table
+              </button>
+              <button id="gpa-send-to-cgpa" class="btn btn-primary">
+                Send to CGPA Table
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-svg">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CGPA Calculator Pane -->
+        <div id="cgpa-pane" class="tab-pane">
+          <div class="pane-header">
+            <div class="pane-title">
+              <h3>Academic CGPA Record</h3>
+              <p>Add your GPA & Credits for each semester to compute your cumulative score</p>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table id="cgpa-table">
+              <thead>
+                <tr>
+                  <th style="width: 35%">Semester</th>
+                  <th style="width: 30%">GPA (0.00 - 10.00)</th>
+                  <th style="width: 30%">Credits Earned</th>
+                  <th style="width: 5%"></th>
+                </tr>
+              </thead>
+              <tbody id="cgpa-table-body">
+                <!-- Rows injected dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="controls-row">
+            <button id="cgpa-add-row" class="btn btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="btn-icon-svg">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+              Add Semester
+            </button>
+            <button id="cgpa-reset" class="btn btn-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-svg">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+              </svg>
+              Reset CGPA Table
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Results Panel (Right Side) -->
+      <section class="dashboard-panel glass-card">
+        <div class="card-header">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="section-icon">
+            <path d="M3 3v18h18"/>
+            <path d="m19 9-5 5-4-4-3 3"/>
+          </svg>
+          <h2>Academic Summary Dashboard</h2>
+        </div>
+
+        <!-- Radial Gauge Container -->
+        <div class="gauge-section">
+          <div class="circular-progress-container">
+            <svg class="radial-svg" viewBox="0 0 100 100">
+              <circle class="radial-bg" cx="50" cy="50" r="42"></circle>
+              <circle id="radial-progress-bar" class="radial-progress" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="264"></circle>
+            </svg>
+            <div class="radial-content">
+              <span id="dashboard-metric-title">GPA</span>
+              <span id="dashboard-metric-value">0.00</span>
+              <span id="dashboard-metric-max">/ 10.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Cards -->
+        <div class="metrics-grid">
+          <div class="metric-mini-card">
+            <div class="mini-card-icon blue">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <div class="mini-card-data">
+              <span class="metric-label">Total Credits Registered</span>
+              <span id="metric-total-credits" class="metric-val">0</span>
+            </div>
+          </div>
+
+          <div class="metric-mini-card">
+            <div class="mini-card-icon green">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <path d="m22 4-10 10.01-3-3"/>
+              </svg>
+            </div>
+            <div class="mini-card-data">
+              <span class="metric-label">Credits Earned (Non-RA)</span>
+              <span id="metric-earned-credits" class="metric-val">0</span>
+            </div>
+          </div>
+
+          <div class="metric-mini-card">
+            <div class="mini-card-icon purple">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a4 4 0 0 1 4 4v7a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4Z"/>
+              </svg>
+            </div>
+            <div class="mini-card-data">
+              <span class="metric-label">Total Grade Points</span>
+              <span id="metric-grade-points" class="metric-val">0</span>
+            </div>
+          </div>
+
+          <div class="metric-mini-card">
+            <div class="mini-card-icon orange">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+              </svg>
+            </div>
+            <div class="mini-card-data">
+              <span class="metric-label">Overall CGPA</span>
+              <span id="metric-cgpa-score" class="metric-val">0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="export-pdf-btn" class="btn btn-primary btn-block">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-svg">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          Export Report Card (PDF)
+        </button>
+      </section>
+    </main>
+  </div>
+
+  <!-- Hidden PDF Transcript Template (For formatting clean exports) -->
+  <div id="print-transcript-template" class="pdf-container" style="display: none;">
+    <div class="pdf-header">
+      <div class="pdf-title-block">
+        <h1>ACADEMIC TRANSCRIPT REPORT</h1>
+        <p class="subtitle">Calculated via Academia Hub</p>
+      </div>
+      <div class="pdf-date" id="pdf-gen-date">Date Generated: --/--/----</div>
+    </div>
+
+    <!-- Student Metadata Section -->
+    <div class="pdf-metadata-box">
+      <h3>Student Profile</h3>
+      <div class="pdf-meta-grid">
+        <div><strong>Student Name:</strong> <span id="pdf-student-name">--</span></div>
+        <div><strong>Register Number:</strong> <span id="pdf-student-roll">--</span></div>
+        <div><strong>Regulation:</strong> <span id="pdf-student-reg">--</span></div>
+        <div><strong>Department:</strong> <span id="pdf-student-dept">--</span></div>
+        <div style="grid-column: span 2;"><strong>Institution:</strong> <span id="pdf-student-college">--</span></div>
+      </div>
+    </div>
+
+    <!-- Cumulative Metrics Row -->
+    <div class="pdf-summary-cards">
+      <div class="pdf-card">
+        <span class="pdf-card-label">Semester GPA</span>
+        <span class="pdf-card-val" id="pdf-gpa-val">0.00</span>
+      </div>
+      <div class="pdf-card">
+        <span class="pdf-card-label">Cumulative CGPA</span>
+        <span class="pdf-card-val" id="pdf-cgpa-val">0.00</span>
+      </div>
+      <div class="pdf-card">
+        <span class="pdf-card-label">Total Credits Registered</span>
+        <span class="pdf-card-val" id="pdf-total-credits-val">0.00</span>
+      </div>
+      <div class="pdf-card">
+        <span class="pdf-card-label">Earned Credits (Non-RA)</span>
+        <span class="pdf-card-val" id="pdf-earned-credits-val">0.00</span>
+      </div>
+    </div>
+
+    <!-- Tables Section -->
+    <div class="pdf-tables-layout">
+      <!-- Semester Courses Table -->
+      <div class="pdf-table-section" id="pdf-gpa-section">
+        <h3>Semester Grade Sheet</h3>
+        <table class="pdf-table">
+          <thead>
+            <tr>
+              <th style="width: 20%">Course Code</th>
+              <th style="width: 50%">Course Name</th>
+              <th style="width: 15%">Credits</th>
+              <th style="width: 15%">Grade</th>
+            </tr>
+          </thead>
+          <tbody id="pdf-gpa-table-body">
+            <!-- Populated via script -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Cumulative Record Table -->
+      <div class="pdf-table-section" id="pdf-cgpa-section" style="margin-top: 25px;">
+        <h3>Cumulative Semester Log</h3>
+        <table class="pdf-table">
+          <thead>
+            <tr>
+              <th style="width: 40%">Semester</th>
+              <th style="width: 30%">GPA Obtained</th>
+              <th style="width: 30%">Credits Earned</th>
+            </tr>
+          </thead>
+          <tbody id="pdf-cgpa-table-body">
+            <!-- Populated via script -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="pdf-disclaimer">
+      <p>* This is an auto-generated report card calculated on the user's input. Grade Points scale: O=10, A+=9, A=8, B+=7, B=6, RA=0.</p>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>&copy; 2026 Academia Hub. Designed with visual excellence and precision.</p>
+  </footer>
+
+  <!-- JS Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
