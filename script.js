@@ -10,7 +10,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3152", name: "Heritage of Tamils", credits: 1 },
       { code: "GE3171", name: "Problem Solving and Python Programming Laboratory", credits: 2 },
       { code: "BS3171", name: "Physics and Chemistry Laboratory", credits: 2 },
-      { code: "GE3172", name: "English Laboratory", credits: 1 }
+      { code: "GE3172", name: "English Laboratory", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     2: [
       { code: "HS3252", name: "Professional English II", credits: 2 },
@@ -22,7 +23,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3252", name: "Tamils and Technology", credits: 1 },
       { code: "GE3271", name: "Engineering Practices Laboratory", credits: 2 },
       { code: "CS3271", name: "Programming in C Laboratory", credits: 2 },
-      { code: "GE3272", name: "Communication Laboratory", credits: 2 }
+      { code: "GE3272", name: "Communication Laboratory", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     3: [
       { code: "MA3354", name: "Discrete Mathematics", credits: 4 },
@@ -33,7 +35,8 @@ const SYLLABUS_PRESETS = {
       { code: "CS3311", name: "Data Structures Laboratory", credits: 1.5 },
       { code: "CS3381", name: "Object Oriented Programming Laboratory", credits: 1.5 },
       { code: "CS3361", name: "Data Science Laboratory", credits: 2 },
-      { code: "GE3361", name: "Professional Development", credits: 1 }
+      { code: "GE3361", name: "Professional Development", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     4: [
       { code: "CS3452", name: "Theory of Computation", credits: 3 },
@@ -43,7 +46,8 @@ const SYLLABUS_PRESETS = {
       { code: "CS3451", name: "Introduction to Operating Systems", credits: 3 },
       { code: "GE3451", name: "Environmental Sciences and Sustainability", credits: 2 },
       { code: "CS3461", name: "Operating Systems Laboratory", credits: 1.5 },
-      { code: "CS3481", name: "Database Management Systems Laboratory", credits: 1.5 }
+      { code: "CS3481", name: "Database Management Systems Laboratory", credits: 1.5 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     5: [
       { code: "CS3591", name: "Computer Networks", credits: 4 },
@@ -51,7 +55,8 @@ const SYLLABUS_PRESETS = {
       { code: "CB3491", name: "Cryptography and Cyber Security", credits: 3 },
       { code: "CS3551", name: "Distributed Computing", credits: 3 },
       { code: "PEC-I", name: "Professional Elective I", credits: 3, isElective: true, electiveType: "PEC" },
-      { code: "PEC-II", name: "Professional Elective II", credits: 3, isElective: true, electiveType: "PEC" }
+      { code: "PEC-II", name: "Professional Elective II", credits: 3, isElective: true, electiveType: "PEC" },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     6: [
       { code: "CCS356", name: "Object Oriented Software Engineering", credits: 4 },
@@ -60,7 +65,8 @@ const SYLLABUS_PRESETS = {
       { code: "PEC-III", name: "Professional Elective III", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-IV", name: "Professional Elective IV", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-V", name: "Professional Elective V", credits: 3, isElective: true, electiveType: "PEC" },
-      { code: "PEC-VI", name: "Professional Elective VI", credits: 3, isElective: true, electiveType: "PEC" }
+      { code: "PEC-VI", name: "Professional Elective VI", credits: 3, isElective: true, electiveType: "PEC" },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     7: [
       { code: "GE3791", name: "Human Values and Ethics", credits: 2 },
@@ -68,7 +74,8 @@ const SYLLABUS_PRESETS = {
       { code: "OEC-II", name: "Open Elective II", credits: 3, isElective: true, electiveType: "OEC-II" },
       { code: "OEC-III", name: "Open Elective III", credits: 3, isElective: true, electiveType: "OEC-III" },
       { code: "OEC-IV", name: "Open Elective IV", credits: 3, isElective: true, electiveType: "OEC-IV" },
-      { code: "CS3711", name: "Summer Internship", credits: 2 }
+      { code: "CS3711", name: "Summer Internship", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     8: [
       { code: "CS3811", name: "Project Work / Internship", credits: 10 }
@@ -84,7 +91,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3152", name: "Heritage of Tamils", credits: 1 },
       { code: "GE3171", name: "Problem Solving and Python Programming Laboratory", credits: 2 },
       { code: "BS3171", name: "Physics and Chemistry Laboratory", credits: 2 },
-      { code: "GE3172", name: "English Laboratory", credits: 1 }
+      { code: "GE3172", name: "English Laboratory", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     2: [
       { code: "HS3252", name: "Professional English II", credits: 2 },
@@ -96,7 +104,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3252", name: "Tamils and Technology", credits: 1 },
       { code: "GE3271", name: "Engineering Practices Laboratory", credits: 2 },
       { code: "CS3271", name: "Programming in C Laboratory", credits: 2 },
-      { code: "GE3272", name: "Communication Laboratory / Foreign Language", credits: 2 }
+      { code: "GE3272", name: "Communication Laboratory / Foreign Language", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     3: [
       { code: "MA3354", name: "Discrete Mathematics", credits: 4 },
@@ -107,7 +116,8 @@ const SYLLABUS_PRESETS = {
       { code: "CD3281", name: "Data Structures and Algorithms Laboratory", credits: 2 },
       { code: "CS3381", name: "Object Oriented Programming Laboratory", credits: 1.5 },
       { code: "CS3361", name: "Data Science Laboratory", credits: 2 },
-      { code: "GE3361", name: "Professional Development", credits: 1 }
+      { code: "GE3361", name: "Professional Development", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     4: [
       { code: "CS3452", name: "Theory of Computation", credits: 3 },
@@ -117,7 +127,8 @@ const SYLLABUS_PRESETS = {
       { code: "CB3491", name: "Cryptography and Cyber Security", credits: 3 },
       { code: "GE3451", name: "Environmental Sciences and Sustainability", credits: 2 },
       { code: "CB3411", name: "Cryptography and Cyber Security Laboratory", credits: 1.5 },
-      { code: "CB3412", name: "Database Management Systems and Security Laboratory", credits: 2 }
+      { code: "CB3412", name: "Database Management Systems and Security Laboratory", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     5: [
       { code: "CS3551", name: "Distributed Computing", credits: 3 },
@@ -126,7 +137,8 @@ const SYLLABUS_PRESETS = {
       { code: "CS3591", name: "Computer Networks", credits: 4 },
       { code: "PEC-I", name: "Professional Elective I", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-II", name: "Professional Elective II", credits: 3, isElective: true, electiveType: "PEC" },
-      { code: "MC-I", name: "Mandatory Course I (Non-Credit)", credits: 0, isElective: true, electiveType: "MC-I" }
+      { code: "MC-I", name: "Mandatory Course I (Non-Credit)", credits: 0, isElective: true, electiveType: "MC-I" },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     6: [
       { code: "CB3601", name: "Cyber Forensics", credits: 4 },
@@ -136,7 +148,8 @@ const SYLLABUS_PRESETS = {
       { code: "PEC-IV", name: "Professional Elective IV", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-V", name: "Professional Elective V", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-VI", name: "Professional Elective VI", credits: 3, isElective: true, electiveType: "PEC" },
-      { code: "MC-II", name: "Mandatory Course II (Non-Credit)", credits: 0, isElective: true, electiveType: "MC-II" }
+      { code: "MC-II", name: "Mandatory Course II (Non-Credit)", credits: 0, isElective: true, electiveType: "MC-II" },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     7: [
       { code: "GE3791", name: "Human Values and Ethics", credits: 2 },
@@ -144,7 +157,8 @@ const SYLLABUS_PRESETS = {
       { code: "OEC-II", name: "Open Elective II", credits: 3, isElective: true, electiveType: "OEC-II" },
       { code: "OEC-III", name: "Open Elective III", credits: 3, isElective: true, electiveType: "OEC-III" },
       { code: "OEC-IV", name: "Open Elective IV", credits: 3, isElective: true, electiveType: "OEC-IV" },
-      { code: "CB3711", name: "Summer Internship", credits: 2 }
+      { code: "CB3711", name: "Summer Internship", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     8: [
       { code: "CB3811", name: "Project Work / Internship", credits: 10 }
@@ -160,7 +174,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3152", name: "Heritage of Tamils", credits: 1 },
       { code: "GE3171", name: "Problem Solving and Python Programming Laboratory", credits: 2 },
       { code: "BS3171", name: "Physics and Chemistry Laboratory", credits: 2 },
-      { code: "GE3172", name: "English Laboratory", credits: 1 }
+      { code: "GE3172", name: "English Laboratory", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     2: [
       { code: "HS3252", name: "Professional English II", credits: 2 },
@@ -172,7 +187,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3252", name: "Tamils and Technology", credits: 1 },
       { code: "GE3271", name: "Engineering Practices Laboratory", credits: 2 },
       { code: "AD3271", name: "Data Structures Design Laboratory", credits: 2 },
-      { code: "GE3272", name: "Communication Laboratory / Foreign Language", credits: 2 }
+      { code: "GE3272", name: "Communication Laboratory / Foreign Language", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     3: [
       { code: "MA3354", name: "Discrete Mathematics", credits: 4 },
@@ -183,7 +199,8 @@ const SYLLABUS_PRESETS = {
       { code: "AL3391", name: "Artificial Intelligence", credits: 3 },
       { code: "AD3381", name: "Database Design and Management Laboratory", credits: 1.5 },
       { code: "AD3311", name: "Artificial Intelligence Laboratory", credits: 1.5 },
-      { code: "GE3361", name: "Professional Development", credits: 1 }
+      { code: "GE3361", name: "Professional Development", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     4: [
       { code: "MA3391", name: "Probability and Statistics", credits: 4 },
@@ -193,7 +210,8 @@ const SYLLABUS_PRESETS = {
       { code: "CS3591", name: "Computer Networks", credits: 4 },
       { code: "GE3451", name: "Environmental Sciences and Sustainability", credits: 2 },
       { code: "AD3411", name: "Data Science and Analytics Laboratory", credits: 2 },
-      { code: "AD3461", name: "Machine Learning Laboratory", credits: 2 }
+      { code: "AD3461", name: "Machine Learning Laboratory", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     5: [
       { code: "AD3501", name: "Deep Learning", credits: 3 },
@@ -203,7 +221,8 @@ const SYLLABUS_PRESETS = {
       { code: "PEC-I", name: "Professional Elective I", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-II", name: "Professional Elective II", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "AD3511", name: "Deep Learning Laboratory", credits: 2 },
-      { code: "AD3512", name: "Summer Internship", credits: 2 }
+      { code: "AD3512", name: "Summer Internship", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     6: [
       { code: "CS3691", name: "Embedded Systems and IoT", credits: 4 },
@@ -211,14 +230,16 @@ const SYLLABUS_PRESETS = {
       { code: "PEC-III", name: "Professional Elective III", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-IV", name: "Professional Elective IV", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-V", name: "Professional Elective V", credits: 3, isElective: true, electiveType: "PEC" },
-      { code: "PEC-VI", name: "Professional Elective VI", credits: 3, isElective: true, electiveType: "PEC" }
+      { code: "PEC-VI", name: "Professional Elective VI", credits: 3, isElective: true, electiveType: "PEC" },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     7: [
       { code: "GE3791", name: "Human Values and Ethics", credits: 2 },
       { code: "MGT", name: "Management Elective", credits: 3, isElective: true, electiveType: "MGT" },
       { code: "OEC-II", name: "Open Elective II", credits: 3, isElective: true, electiveType: "OEC-II" },
       { code: "OEC-III", name: "Open Elective III", credits: 3, isElective: true, electiveType: "OEC-III" },
-      { code: "OEC-IV", name: "Open Elective IV", credits: 3, isElective: true, electiveType: "OEC-IV" }
+      { code: "OEC-IV", name: "Open Elective IV", credits: 3, isElective: true, electiveType: "OEC-IV" },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     8: [
       { code: "AD3811", name: "Project Work / Internship", credits: 10 }
@@ -234,7 +255,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3152", name: "Heritage of Tamils", credits: 1 },
       { code: "GE3171", name: "Problem Solving and Python Programming Laboratory", credits: 2 },
       { code: "BS3171", name: "Physics and Chemistry Laboratory", credits: 2 },
-      { code: "GE3172", name: "English Laboratory", credits: 1 }
+      { code: "GE3172", name: "English Laboratory", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     2: [
       { code: "HS3252", name: "Professional English II", credits: 2 },
@@ -246,7 +268,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3252", name: "Tamils and Technology", credits: 1 },
       { code: "GE3271", name: "Engineering Practices Laboratory", credits: 2 },
       { code: "CS3271", name: "Programming in C Laboratory", credits: 2 },
-      { code: "GE3272", name: "Communication Laboratory / Foreign Language", credits: 2 }
+      { code: "GE3272", name: "Communication Laboratory / Foreign Language", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     3: [
       { code: "MA3354", name: "Discrete Mathematics", credits: 4 },
@@ -257,7 +280,8 @@ const SYLLABUS_PRESETS = {
       { code: "CD3281", name: "Data Structures and Algorithms Laboratory", credits: 2 },
       { code: "CS3381", name: "Object Oriented Programming Laboratory", credits: 1.5 },
       { code: "CS3361", name: "Data Science Laboratory", credits: 2 },
-      { code: "GE3361", name: "Professional Development", credits: 1 }
+      { code: "GE3361", name: "Professional Development", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     4: [
       { code: "CS3452", name: "Theory of Computation", credits: 3 },
@@ -267,7 +291,8 @@ const SYLLABUS_PRESETS = {
       { code: "AL3391", name: "Artificial Intelligence", credits: 3 },
       { code: "GE3451", name: "Environmental Sciences and Sustainability", credits: 2 },
       { code: "AL3411", name: "Artificial Intelligence & Machine Learning Laboratory", credits: 2 },
-      { code: "AD3381", name: "Database Design and Management Laboratory", credits: 1.5 }
+      { code: "AD3381", name: "Database Design and Management Laboratory", credits: 1.5 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     5: [
       { code: "AL3501", name: "Natural Language Processing", credits: 4 },
@@ -276,7 +301,8 @@ const SYLLABUS_PRESETS = {
       { code: "CS3551", name: "Distributed Computing", credits: 3 },
       { code: "PEC-I", name: "Professional Elective I", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-II", name: "Professional Elective II", credits: 3, isElective: true, electiveType: "PEC" },
-      { code: "MC-I", name: "Mandatory Course I (Non-Credit)", credits: 0, isElective: true, electiveType: "MC-I" }
+      { code: "MC-I", name: "Mandatory Course I (Non-Credit)", credits: 0, isElective: true, electiveType: "MC-I" },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     6: [
       { code: "CCS356", name: "Object Oriented Software Engineering", credits: 4 },
@@ -286,7 +312,8 @@ const SYLLABUS_PRESETS = {
       { code: "PEC-IV", name: "Professional Elective IV", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-V", name: "Professional Elective V", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-VI", name: "Professional Elective VI", credits: 3, isElective: true, electiveType: "PEC" },
-      { code: "MC-II", name: "Mandatory Course II (Non-Credit)", credits: 0, isElective: true, electiveType: "MC-II" }
+      { code: "MC-II", name: "Mandatory Course II (Non-Credit)", credits: 0, isElective: true, electiveType: "MC-II" },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     7: [
       { code: "GE3791", name: "Human Values and Ethics", credits: 2 },
@@ -294,7 +321,8 @@ const SYLLABUS_PRESETS = {
       { code: "OEC-II", name: "Open Elective II", credits: 3, isElective: true, electiveType: "OEC-II" },
       { code: "OEC-III", name: "Open Elective III", credits: 3, isElective: true, electiveType: "OEC-III" },
       { code: "OEC-IV", name: "Open Elective IV", credits: 3, isElective: true, electiveType: "OEC-IV" },
-      { code: "AL3711", name: "Summer Internship", credits: 2 }
+      { code: "AL3711", name: "Summer Internship", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     8: [
       { code: "AL3811", name: "Project Work / Internship", credits: 10 }
@@ -311,7 +339,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3152", name: "Heritage of Tamils", credits: 1 },
       { code: "GE3171", name: "Problem Solving and Python Programming Laboratory", credits: 2 },
       { code: "BS3171", name: "Physics and Chemistry Laboratory", credits: 2 },
-      { code: "GE3172", name: "English Laboratory", credits: 1 }
+      { code: "GE3172", name: "English Laboratory", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     2: [
       { code: "HS3252", name: "Professional English II", credits: 2 },
@@ -323,7 +352,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3252", name: "Tamils and Technology", credits: 1 },
       { code: "GE3271", name: "Engineering Practices Laboratory", credits: 2 },
       { code: "EE3271", name: "Electric Circuits Laboratory", credits: 2 },
-      { code: "GE3272", name: "Communication Laboratory / Foreign Language", credits: 2 }
+      { code: "GE3272", name: "Communication Laboratory / Foreign Language", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     3: [
       { code: "MA3303", name: "Probability and Complex Functions", credits: 4 },
@@ -335,7 +365,8 @@ const SYLLABUS_PRESETS = {
       { code: "EC3311", name: "Electronic Devices and Circuits Laboratory", credits: 1.5 },
       { code: "EE3311", name: "Electrical Machines Laboratory – I", credits: 1.5 },
       { code: "CS3362", name: "C Programming and Data Structures Laboratory", credits: 1.5 },
-      { code: "GE3361", name: "Professional Development", credits: 1 }
+      { code: "GE3361", name: "Professional Development", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     4: [
       { code: "GE3451", name: "Environmental Sciences and Sustainability", credits: 2 },
@@ -346,7 +377,8 @@ const SYLLABUS_PRESETS = {
       { code: "EE3405", name: "Electrical Machines – II", credits: 3 },
       { code: "EE3411", name: "Electrical Machines Laboratory – II", credits: 1.5 },
       { code: "EE3412", name: "Linear and Digital Circuits Laboratory", credits: 1.5 },
-      { code: "EE3413", name: "Microprocessor and Microcontroller Laboratory", credits: 1.5 }
+      { code: "EE3413", name: "Microprocessor and Microcontroller Laboratory", credits: 1.5 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     5: [
       { code: "EE3501", name: "Power System Analysis", credits: 3 },
@@ -357,7 +389,8 @@ const SYLLABUS_PRESETS = {
       { code: "PEC-III", name: "Professional Elective III", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "MC-I", name: "Mandatory Course I (Non-Credit)", credits: 0, isElective: true, electiveType: "MC-I" },
       { code: "EE3511", name: "Power Electronics Laboratory", credits: 1.5 },
-      { code: "EE3512", name: "Control and Instrumentation Laboratory", credits: 2 }
+      { code: "EE3512", name: "Control and Instrumentation Laboratory", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     6: [
       { code: "EE3601", name: "Protection and Switchgear", credits: 3 },
@@ -367,7 +400,8 @@ const SYLLABUS_PRESETS = {
       { code: "PEC-V", name: "Professional Elective V", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-VI", name: "Professional Elective VI", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "MC-II", name: "Mandatory Course II (Non-Credit)", credits: 0, isElective: true, electiveType: "MC-II" },
-      { code: "EE3611", name: "Power System Laboratory", credits: 1.5 }
+      { code: "EE3611", name: "Power System Laboratory", credits: 1.5 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     7: [
       { code: "EE3701", name: "High Voltage Engineering", credits: 3 },
@@ -376,7 +410,8 @@ const SYLLABUS_PRESETS = {
       { code: "OEC-II", name: "Open Elective II", credits: 3, isElective: true, electiveType: "OEC-II" },
       { code: "OEC-III", name: "Open Elective III", credits: 3, isElective: true, electiveType: "OEC-III" },
       { code: "OEC-IV", name: "Open Elective IV", credits: 3, isElective: true, electiveType: "OEC-IV" },
-      { code: "PEC-VII", name: "Professional Elective VII", credits: 3, isElective: true, electiveType: "PEC" }
+      { code: "PEC-VII", name: "Professional Elective VII", credits: 3, isElective: true, electiveType: "PEC" },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     8: [
       { code: "EE3811", name: "Project Work / Internship", credits: 10 }
@@ -392,7 +427,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3152", name: "Heritage of Tamils", credits: 1 },
       { code: "GE3171", name: "Problem Solving and Python Programming Laboratory", credits: 2 },
       { code: "BS3171", name: "Physics and Chemistry Laboratory", credits: 2 },
-      { code: "GE3172", name: "English Laboratory", credits: 1 }
+      { code: "GE3172", name: "English Laboratory", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     2: [
       { code: "HS3252", name: "Professional English II", credits: 2 },
@@ -404,7 +440,8 @@ const SYLLABUS_PRESETS = {
       { code: "GE3252", name: "Tamils and Technology", credits: 1 },
       { code: "GE3271", name: "Engineering Practices Laboratory", credits: 2 },
       { code: "EC3271", name: "Circuits Analysis Laboratory", credits: 1 },
-      { code: "GE3272", name: "Communication Laboratory / Foreign Language", credits: 2 }
+      { code: "GE3272", name: "Communication Laboratory / Foreign Language", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     3: [
       { code: "MA3355", name: "Random Processes and Linear Algebra", credits: 4 },
@@ -415,7 +452,8 @@ const SYLLABUS_PRESETS = {
       { code: "EC3352", name: "Digital Systems Design", credits: 4 },
       { code: "EC3361", name: "Electronic Devices and Circuits Laboratory", credits: 1.5 },
       { code: "CS3362", name: "C Programming and Data Structures Laboratory", credits: 1.5 },
-      { code: "GE3361", name: "Professional Development", credits: 1 }
+      { code: "GE3361", name: "Professional Development", credits: 1 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     4: [
       { code: "EC3452", name: "Electromagnetic Fields", credits: 3 },
@@ -425,7 +463,8 @@ const SYLLABUS_PRESETS = {
       { code: "EC3491", name: "Communication Systems", credits: 3 },
       { code: "GE3451", name: "Environmental Sciences and Sustainability", credits: 2 },
       { code: "EC3461", name: "Communication Systems Laboratory", credits: 1.5 },
-      { code: "EC3462", name: "Linear Integrated Circuits Laboratory", credits: 1.5 }
+      { code: "EC3462", name: "Linear Integrated Circuits Laboratory", credits: 1.5 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     5: [
       { code: "EC3501", name: "Wireless Communication", credits: 4 },
@@ -434,7 +473,8 @@ const SYLLABUS_PRESETS = {
       { code: "PEC-I", name: "Professional Elective I", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-II", name: "Professional Elective II", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-III", name: "Professional Elective III", credits: 3, isElective: true, electiveType: "PEC" },
-      { code: "EC3561", name: "VLSI Laboratory", credits: 2 }
+      { code: "EC3561", name: "VLSI Laboratory", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     6: [
       { code: "ET3491", name: "Embedded Systems and IoT Design", credits: 4 },
@@ -442,7 +482,8 @@ const SYLLABUS_PRESETS = {
       { code: "OEC-I", name: "Open Elective I", credits: 3, isElective: true, electiveType: "OEC-I" },
       { code: "PEC-IV", name: "Professional Elective IV", credits: 3, isElective: true, electiveType: "PEC" },
       { code: "PEC-V", name: "Professional Elective V", credits: 3, isElective: true, electiveType: "PEC" },
-      { code: "PEC-VI", name: "Professional Elective VI", credits: 3, isElective: true, electiveType: "PEC" }
+      { code: "PEC-VI", name: "Professional Elective VI", credits: 3, isElective: true, electiveType: "PEC" },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     7: [
       { code: "GE3791", name: "Human Values and Ethics", credits: 2 },
@@ -450,7 +491,8 @@ const SYLLABUS_PRESETS = {
       { code: "OEC-II", name: "Open Elective II", credits: 3, isElective: true, electiveType: "OEC-II" },
       { code: "OEC-III", name: "Open Elective III", credits: 3, isElective: true, electiveType: "OEC-III" },
       { code: "OEC-IV", name: "Open Elective IV", credits: 3, isElective: true, electiveType: "OEC-IV" },
-      { code: "EC3711", name: "Summer Internship", credits: 2 }
+      { code: "EC3711", name: "Summer Internship", credits: 2 },
+      { code: "NM", name: "Naan Mudhalvan – Skill Course", credits: 2 }
     ],
     8: [
       { code: "EC3811", name: "Project Work / Internship", credits: 10 }
@@ -906,6 +948,7 @@ const GRADE_POINTS = {
   "A": 8,
   "B+": 7,
   "B": 6,
+  "C": 5,
   "RA": 0
 };
 
@@ -950,6 +993,24 @@ const studentRegSelect = document.getElementById('student-reg');
 const studentDeptSelect = document.getElementById('student-dept');
 const studentCollegeInput = document.getElementById('student-college');
 
+// Screenshot Import (OCR) elements
+const ocrImportBtn = document.getElementById('ocr-import-btn');
+const ocrFileInput = document.getElementById('ocr-file-input');
+const ocrModalOverlay = document.getElementById('ocr-modal-overlay');
+const ocrModalClose = document.getElementById('ocr-modal-close');
+const ocrStatusSection = document.getElementById('ocr-status-section');
+const ocrStatusText = document.getElementById('ocr-status-text');
+const ocrProgressFill = document.getElementById('ocr-progress-fill');
+const ocrResultsSection = document.getElementById('ocr-results-section');
+const ocrPreviewTable = document.getElementById('ocr-preview-table');
+const ocrPreviewTableBody = document.getElementById('ocr-preview-table-body');
+const ocrEmptyMessage = document.getElementById('ocr-empty-message');
+const ocrCancelBtn = document.getElementById('ocr-cancel-btn');
+const ocrConfirmBtn = document.getElementById('ocr-confirm-btn');
+
+let activeOcrWorker = null;
+let tesseractLoadPromise = null;
+
 // --- Initialization & Theme Setup ---
 document.addEventListener('DOMContentLoaded', () => {
   setupTheme();
@@ -970,11 +1031,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Reload presets automatically if the user changes the department from the profile card
   studentDeptSelect.addEventListener('change', () => {
     if (semesterPresetDropdown.value) {
-      handlePresetChange({ target: semesterPresetDropdown });
+      handlePresetChange({ target: semesterPresetDropdown }, { forceConfirm: true });
     }
   });
 
   exportPdfBtn.addEventListener('click', generatePdfTranscript);
+
+  // Screenshot import (OCR)
+  ocrImportBtn.addEventListener('click', () => ocrFileInput.click());
+  ocrFileInput.addEventListener('change', handleScreenshotUpload);
+  ocrModalClose.addEventListener('click', closeOcrModal);
+  ocrCancelBtn.addEventListener('click', closeOcrModal);
+  ocrConfirmBtn.addEventListener('click', handleOcrConfirm);
+  ocrModalOverlay.addEventListener('click', (e) => {
+    if (e.target === ocrModalOverlay) closeOcrModal();
+  });
 
   // Real-time calculation triggers
   gpaTableBody.addEventListener('input', calculateGpa);
@@ -1068,7 +1139,7 @@ function setupInitialRows() {
 // --- GPA Calculator Functions ---
 
 // Add Row in GPA Table
-function addGpaRow(code = "", name = "", credits = "", isElective = false, electiveType = "") {
+function addGpaRow(code = "", name = "", credits = "", isElective = false, electiveType = "", grade = "") {
   const tr = document.createElement('tr');
   tr.className = 'row-entry';
 
@@ -1117,6 +1188,7 @@ function addGpaRow(code = "", name = "", credits = "", isElective = false, elect
         <option value="A">A (Very Good)</option>
         <option value="B+">B+ (Good)</option>
         <option value="B">B (Average)</option>
+        <option value="C">C (Pass)</option>
         <option value="RA">RA (Re-Appearance)</option>
       </select>
     </td>
@@ -1130,6 +1202,11 @@ function addGpaRow(code = "", name = "", credits = "", isElective = false, elect
   `;
 
   gpaTableBody.appendChild(tr);
+
+  // Prefill grade if one was supplied (e.g. GRADE_POINTS-validated value from OCR import)
+  if (grade && GRADE_POINTS.hasOwnProperty(grade)) {
+    tr.querySelector('.gpa-grade-select').value = grade;
+  }
 
   // Wire dynamic events
   const deleteBtn = tr.querySelector('.btn-delete');
@@ -1177,7 +1254,9 @@ function resetGpaTable() {
 }
 
 // Handle preset syllabus load (combines selected Department & Semester)
-function handlePresetChange(e) {
+// opts.forceConfirm: pass true when calling this programmatically (e.g. a department
+// switch) so an already-filled table always prompts before being overwritten.
+function handlePresetChange(e, opts = {}) {
   const semNum = e.target.value;
   const currentDept = studentDeptSelect.value || 'cse';
 
@@ -1185,11 +1264,10 @@ function handlePresetChange(e) {
 
   if (!presetCourses) return;
 
-  // If there are rows already, ask for confirmation
-  const isTriggeredBySelect = e.stopPropagation !== undefined;
-  if (isTriggeredBySelect && gpaTableBody.children.length > 0) {
+  // If there are rows already, always ask for confirmation before overwriting them
+  if (gpaTableBody.children.length > 0) {
     if (!confirm(`Do you want to load preset for Semester ${semNum}? This will overwrite the current GPA calculator table.`)) {
-      e.target.value = "";
+      if (!opts.forceConfirm) e.target.value = "";
       return;
     }
   }
@@ -1612,12 +1690,13 @@ function generatePdfTranscript() {
       if (grade !== "RA") gpaEarnedCredits += credits;
 
       const pdfTr = document.createElement('tr');
-      pdfTr.innerHTML = `
-        <td>${code || "N/A"}</td>
-        <td>${name || "N/A"}</td>
-        <td>${credits.toFixed(1)}</td>
-        <td style="font-weight: 700;">${grade}</td>
-      `;
+      const cells = [code || "N/A", name || "N/A", credits.toFixed(1), grade];
+      cells.forEach((val, i) => {
+        const td = document.createElement('td');
+        td.textContent = val;
+        if (i === 3) td.style.fontWeight = '700';
+        pdfTr.appendChild(td);
+      });
       pdfGpaBody.appendChild(pdfTr);
     }
   });
@@ -1648,11 +1727,11 @@ function generatePdfTranscript() {
       cgpaTotalPoints += (gpa * credits);
 
       const pdfTr = document.createElement('tr');
-      pdfTr.innerHTML = `
-        <td>${sem || "N/A"}</td>
-        <td>${gpa.toFixed(2)}</td>
-        <td>${credits.toFixed(1)}</td>
-      `;
+      [sem || "N/A", gpa.toFixed(2), credits.toFixed(1)].forEach(val => {
+        const td = document.createElement('td');
+        td.textContent = val;
+        pdfTr.appendChild(td);
+      });
       pdfCgpaBody.appendChild(pdfTr);
     }
   });
@@ -1687,4 +1766,250 @@ function generatePdfTranscript() {
       printElement.style.display = 'none';
       alert("Failed to export PDF. Please check that your input data is valid and try again.");
     });
+}
+
+// --- Screenshot Import (OCR) ---
+// Lets a student upload a screenshot of their university result page and
+// auto-fills the GPA table by running client-side OCR (Tesseract.js, loaded
+// on demand) and parsing subject code / name / credits / grade out of the
+// recognized text. Because OCR is never perfect, detected rows are always
+// shown in a review step (with every field editable, and a checkbox to skip
+// rows) before anything is written into the real GPA table.
+
+const OCR_CDN_URL = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+
+// Load the Tesseract.js library from CDN the first time it's needed, instead
+// of on every page load, to keep the app's normal startup light.
+function ensureTesseractLoaded() {
+  if (window.Tesseract) return Promise.resolve();
+  if (tesseractLoadPromise) return tesseractLoadPromise;
+
+  tesseractLoadPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = OCR_CDN_URL;
+    script.onload = () => resolve();
+    script.onerror = () => {
+      tesseractLoadPromise = null;
+      reject(new Error('Could not load the OCR engine. Please check your internet connection and try again.'));
+    };
+    document.head.appendChild(script);
+  });
+
+  return tesseractLoadPromise;
+}
+
+function openOcrModal() {
+  ocrModalOverlay.style.display = 'flex';
+}
+
+function closeOcrModal() {
+  ocrModalOverlay.style.display = 'none';
+  ocrFileInput.value = ''; // allow re-selecting the same file next time
+
+  if (activeOcrWorker) {
+    activeOcrWorker.terminate().catch(() => {});
+    activeOcrWorker = null;
+  }
+}
+
+function setOcrStatus(text, progressPercent) {
+  ocrStatusText.textContent = text;
+  ocrProgressFill.style.width = Math.min(Math.max(progressPercent, 0), 100) + '%';
+}
+
+async function handleScreenshotUpload(e) {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+
+  openOcrModal();
+  ocrStatusSection.style.display = 'flex';
+  ocrResultsSection.style.display = 'none';
+  ocrConfirmBtn.style.display = 'none';
+  setOcrStatus('Loading OCR engine\u2026', 0);
+
+  try {
+    await ensureTesseractLoaded();
+    setOcrStatus('Warming up the OCR engine\u2026', 8);
+
+    activeOcrWorker = await Tesseract.createWorker('eng', 1, {
+      logger: (m) => {
+        if (m.status === 'recognizing text' && typeof m.progress === 'number') {
+          setOcrStatus('Reading the screenshot\u2026', 15 + m.progress * 80);
+        }
+      }
+    });
+
+    const { data: { text } } = await activeOcrWorker.recognize(file);
+    await activeOcrWorker.terminate();
+    activeOcrWorker = null;
+
+    setOcrStatus('Parsing detected subjects\u2026', 100);
+    const rows = parseResultScreenshotText(text);
+
+    ocrStatusSection.style.display = 'none';
+    ocrResultsSection.style.display = 'block';
+    renderOcrPreviewRows(rows);
+  } catch (err) {
+    console.error('OCR failed:', err);
+    activeOcrWorker = null;
+    setOcrStatus(err.message || "Something went wrong reading that image. Try a clearer screenshot, or add subjects manually.", 0);
+  }
+}
+
+// Heuristic parser for a university result-page screenshot. Result tables are
+// typically laid out as: [S.No] Subject Code | Subject Title | Credits | Grade
+// (left-to-right), so per line we anchor on the LAST token that matches a
+// known grade, then look just before it for a plausible credit number, then
+// treat whatever is left as the subject code + name.
+function parseResultScreenshotText(text) {
+  const knownGrades = Object.keys(GRADE_POINTS); // O, A+, A, B+, B, C, RA
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  const rows = [];
+
+  lines.forEach(line => {
+    const tokens = line.split(/\s+/).filter(Boolean);
+    if (tokens.length < 3) return; // too short to plausibly be a subject row
+
+    // 1) Find the grade — check the last few tokens on the line for an exact match
+    let gradeIdx = -1;
+    for (let i = tokens.length - 1; i >= 0 && i >= tokens.length - 3; i--) {
+      const cleaned = tokens[i].toUpperCase().replace(/[^A-Z+]/g, '');
+      if (knownGrades.includes(cleaned)) {
+        gradeIdx = i;
+        break;
+      }
+    }
+    if (gradeIdx === -1) return;
+    const grade = tokens[gradeIdx].toUpperCase().replace(/[^A-Z+]/g, '');
+
+    // 2) Find credits — a standalone 0-10 number just before the grade
+    let creditsIdx = -1;
+    for (let i = gradeIdx - 1; i >= 0 && i >= gradeIdx - 3; i--) {
+      const raw = tokens[i].replace(',', '.');
+      if (/^\d+(\.\d+)?$/.test(raw)) {
+        const num = parseFloat(raw);
+        if (num >= 0 && num <= 10) {
+          creditsIdx = i;
+          break;
+        }
+      }
+    }
+    if (creditsIdx === -1) return;
+    const credits = parseFloat(tokens[creditsIdx].replace(',', '.'));
+
+    // 3) Subject code. Most result pages lead with a serial-number column
+    // (1, 2, 3...) before the actual code - skip a lone short leading number
+    // first, then check whether the next token looks like a real course code.
+    let code = "";
+    let scanIdx = 0;
+    if (/^\d{1,3}$/.test(tokens[0]) && tokens.length > 1) {
+      scanIdx = 1;
+    }
+    let nameStart = scanIdx;
+    if (scanIdx < creditsIdx && /^[A-Z]{2,4}\d{3,5}[A-Z]?$/i.test(tokens[scanIdx])) {
+      code = tokens[scanIdx].toUpperCase();
+      nameStart = scanIdx + 1;
+    }
+
+    // 4) Whatever remains between the code and the credits column is the subject name
+    const name = tokens.slice(nameStart, creditsIdx).join(' ').trim();
+    if (!name) return;
+
+    rows.push({ code, name, credits, grade });
+  });
+
+  return rows;
+}
+
+function renderOcrPreviewRows(rows) {
+  ocrPreviewTableBody.innerHTML = '';
+
+  if (rows.length === 0) {
+    ocrPreviewTable.style.display = 'none';
+    ocrEmptyMessage.style.display = 'block';
+    ocrConfirmBtn.style.display = 'none';
+    return;
+  }
+
+  ocrPreviewTable.style.display = '';
+  ocrEmptyMessage.style.display = 'none';
+  ocrConfirmBtn.style.display = '';
+
+  rows.forEach(row => {
+    const tr = document.createElement('tr');
+
+    const includeTd = document.createElement('td');
+    const includeCb = document.createElement('input');
+    includeCb.type = 'checkbox';
+    includeCb.className = 'ocr-row-include';
+    includeCb.checked = true;
+    includeCb.addEventListener('change', () => {
+      tr.classList.toggle('ocr-row-excluded', !includeCb.checked);
+    });
+    includeTd.appendChild(includeCb);
+
+    const codeTd = document.createElement('td');
+    const codeInput = document.createElement('input');
+    codeInput.type = 'text';
+    codeInput.className = 'ocr-code-input';
+    codeInput.value = row.code;
+    codeTd.appendChild(codeInput);
+
+    const nameTd = document.createElement('td');
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.className = 'ocr-name-input';
+    nameInput.value = row.name;
+    nameTd.appendChild(nameInput);
+
+    const creditsTd = document.createElement('td');
+    const creditsInput = document.createElement('input');
+    creditsInput.type = 'number';
+    creditsInput.min = '0';
+    creditsInput.max = '10';
+    creditsInput.step = '0.5';
+    creditsInput.className = 'ocr-credits-input';
+    creditsInput.value = row.credits;
+    creditsTd.appendChild(creditsInput);
+
+    const gradeTd = document.createElement('td');
+    const gradeSelect = document.createElement('select');
+    gradeSelect.className = 'ocr-grade-select';
+    Object.keys(GRADE_POINTS).forEach(g => {
+      const opt = document.createElement('option');
+      opt.value = g;
+      opt.textContent = g;
+      if (g === row.grade) opt.selected = true;
+      gradeSelect.appendChild(opt);
+    });
+    gradeTd.appendChild(gradeSelect);
+
+    tr.append(includeTd, codeTd, nameTd, creditsTd, gradeTd);
+    ocrPreviewTableBody.appendChild(tr);
+  });
+}
+
+function handleOcrConfirm() {
+  const rows = ocrPreviewTableBody.querySelectorAll('tr');
+  let addedCount = 0;
+
+  rows.forEach(tr => {
+    if (!tr.querySelector('.ocr-row-include').checked) return;
+
+    const code = tr.querySelector('.ocr-code-input').value.trim();
+    const name = tr.querySelector('.ocr-name-input').value.trim();
+    const credits = tr.querySelector('.ocr-credits-input').value;
+    const grade = tr.querySelector('.ocr-grade-select').value;
+
+    if (!name && !code) return;
+
+    addGpaRow(code, name, credits, false, "", grade);
+    addedCount++;
+  });
+
+  if (addedCount > 0) {
+    calculateGpa();
+  }
+
+  closeOcrModal();
 }

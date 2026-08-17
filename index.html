@@ -218,6 +218,19 @@
                 <option value="8">Semester 8</option>
               </select>
             </div>
+
+            <!-- Screenshot Import: OCR-based auto-fill from a result page screenshot -->
+            <div class="screenshot-import-group">
+              <label>Import From Result Screenshot</label>
+              <button type="button" id="ocr-import-btn" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-svg">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2Z" />
+                  <circle cx="12" cy="13" r="4" />
+                </svg>
+                Upload Screenshot
+              </button>
+              <input type="file" id="ocr-file-input" accept="image/*" hidden>
+            </div>
           </div>
 
           <div class="table-wrapper">
@@ -485,7 +498,68 @@
 
     <div class="pdf-disclaimer">
       <p>* This is an auto-generated report card calculated on the user's input. Grade Points scale: O=10, A+=9, A=8,
-        B+=7, B=6, RA=0.</p>
+        B+=7, B=6, C=5, RA=0.</p>
+    </div>
+  </div>
+
+  <!-- Screenshot Import: OCR Review Modal -->
+  <div id="ocr-modal-overlay" class="ocr-modal-overlay" style="display: none;">
+    <div class="ocr-modal glass-card">
+      <div class="card-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="section-icon">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2Z" />
+          <circle cx="12" cy="13" r="4" />
+        </svg>
+        <h2>Review Detected Subjects</h2>
+        <button type="button" id="ocr-modal-close" class="btn-icon" aria-label="Close" title="Close" style="margin-left: auto;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Shown while OCR is running -->
+      <div id="ocr-status-section" class="ocr-status-section">
+        <div class="ocr-spinner"></div>
+        <p id="ocr-status-text">Loading OCR engine&hellip;</p>
+        <div class="ocr-progress-track">
+          <div id="ocr-progress-fill" class="ocr-progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Shown once OCR finishes and rows are ready for review -->
+      <div id="ocr-results-section" class="ocr-results-section" style="display: none;">
+        <p class="ocr-hint">We do our best to read the screenshot automatically, but OCR isn't perfect &mdash;
+          double-check every code, credit and grade below (and untick anything that shouldn't be imported)
+          before adding these to your GPA table.</p>
+        <div class="table-wrapper">
+          <table id="ocr-preview-table">
+            <thead>
+              <tr>
+                <th style="width: 5%"></th>
+                <th style="width: 20%">Subject Code</th>
+                <th style="width: 40%">Subject Name</th>
+                <th style="width: 15%">Credits</th>
+                <th style="width: 20%">Grade</th>
+              </tr>
+            </thead>
+            <tbody id="ocr-preview-table-body">
+              <!-- Populated via script -->
+            </tbody>
+          </table>
+        </div>
+        <p id="ocr-empty-message" style="display: none; color: var(--text-secondary); text-align: center; padding: 20px 0;">
+          Couldn't confidently detect any subject rows in that image. Try a clearer, cropped-to-the-table
+          screenshot, or add your subjects manually.
+        </p>
+      </div>
+
+      <div class="ocr-modal-footer">
+        <button type="button" id="ocr-cancel-btn" class="btn btn-outline">Cancel</button>
+        <button type="button" id="ocr-confirm-btn" class="btn btn-primary" style="display: none;">
+          Add Selected Rows to GPA Table
+        </button>
+      </div>
     </div>
   </div>
 
