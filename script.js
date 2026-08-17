@@ -1005,11 +1005,14 @@ const ocrResultsSection = document.getElementById('ocr-results-section');
 const ocrPreviewTable = document.getElementById('ocr-preview-table');
 const ocrPreviewTableBody = document.getElementById('ocr-preview-table-body');
 const ocrEmptyMessage = document.getElementById('ocr-empty-message');
+const ocrToggleRawTextBtn = document.getElementById('ocr-toggle-raw-text');
+const ocrRawText = document.getElementById('ocr-raw-text');
 const ocrCancelBtn = document.getElementById('ocr-cancel-btn');
 const ocrConfirmBtn = document.getElementById('ocr-confirm-btn');
 
 let activeOcrWorker = null;
 let tesseractLoadPromise = null;
+let lastOcrRawText = '';
 
 // --- Initialization & Theme Setup ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -1045,6 +1048,11 @@ document.addEventListener('DOMContentLoaded', () => {
   ocrConfirmBtn.addEventListener('click', handleOcrConfirm);
   ocrModalOverlay.addEventListener('click', (e) => {
     if (e.target === ocrModalOverlay) closeOcrModal();
+  });
+  ocrToggleRawTextBtn.addEventListener('click', () => {
+    const showing = ocrRawText.style.display !== 'none';
+    ocrRawText.style.display = showing ? 'none' : 'block';
+    ocrToggleRawTextBtn.textContent = showing ? 'Show What Was Read From The Image' : 'Hide Raw Text';
   });
 
   // Real-time calculation triggers
@@ -1805,6 +1813,8 @@ function openOcrModal() {
 function closeOcrModal() {
   ocrModalOverlay.style.display = 'none';
   ocrFileInput.value = ''; // allow re-selecting the same file next time
+  ocrRawText.style.display = 'none';
+  ocrToggleRawTextBtn.textContent = 'Show What Was Read From The Image';
 
   if (activeOcrWorker) {
     activeOcrWorker.terminate().catch(() => {});
@@ -1825,6 +1835,8 @@ async function handleScreenshotUpload(e) {
   ocrStatusSection.style.display = 'flex';
   ocrResultsSection.style.display = 'none';
   ocrConfirmBtn.style.display = 'none';
+  ocrRawText.style.display = 'none';
+  ocrToggleRawTextBtn.textContent = 'Show What Was Read From The Image';
   setOcrStatus('Loading OCR engine\u2026', 0);
 
   try {
@@ -1846,6 +1858,9 @@ async function handleScreenshotUpload(e) {
     setOcrStatus('Parsing detected subjects\u2026', 100);
     const rows = parseResultScreenshotText(text);
 
+    lastOcrRawText = text;
+    ocrRawText.textContent = text.trim() || '(No text was recognized in that image.)';
+
     ocrStatusSection.style.display = 'none';
     ocrResultsSection.style.display = 'block';
     renderOcrPreviewRows(rows);
@@ -1856,19 +1871,64 @@ async function handleScreenshotUpload(e) {
   }
 }
 
-// Heuristic parser for a university result-page screenshot. Result tables are
-// typically laid out as: [S.No] Subject Code | Subject Title | Credits | Grade
-// (left-to-right), so per line we anchor on the LAST token that matches a
-// known grade, then look just before it for a plausible credit number, then
-// treat whatever is left as the subject code + name.
+// Builds a { CODE: { name, credits } } lookup from the app's own curriculum
+// data (core courses in SYLLABUS_PRESETS + elective catalogs in ELECTIVES),
+// so a code detected on a result page can be auto-filled with its name and
+// credit value even when the page itself doesn't show them - which is the
+// normal case for Anna University's own result portal.
+function buildCourseInfoMap() {
+  const map = {};
+
+  Object.values(SYLLABUS_PRESETS).forEach(deptPresets => {
+    Object.values(deptPresets).forEach(semList => {
+      semList.forEach(course => {
+        if (!course.isElective && course.code && !map[course.code]) {
+          map[course.code] = { name: course.name, credits: course.credits };
+        }
+      });
+    });
+  });
+
+  // Elective catalogs only store {code, name} - credit value follows the
+  // fixed convention for that slot type (matches SYLLABUS_PRESETS slots above)
+  const electiveCredits = {
+    PEC: 3, 'OEC-I': 3, 'OEC-II': 3, 'OEC-III': 3, 'OEC-IV': 3, MGT: 3, 'MC-I': 0, 'MC-II': 0
+  };
+  Object.entries(ELECTIVES).forEach(([type, entry]) => {
+    const credits = electiveCredits[type] !== undefined ? electiveCredits[type] : 3;
+    const addAll = (list) => list.forEach(course => {
+      if (course.code && !map[course.code]) {
+        map[course.code] = { name: course.name, credits };
+      }
+    });
+    if (Array.isArray(entry)) {
+      addAll(entry);
+    } else if (entry && typeof entry === 'object') {
+      Object.values(entry).forEach(addAll);
+    }
+  });
+
+  return map;
+}
+
+// Heuristic parser for a university result-page screenshot. Deliberately
+// does NOT require a credits or subject-name column in the text, because
+// Anna University's own result portal only shows Semester | Subject Code |
+// Grade | Result - no name, no credits. Per line: find a known grade token,
+// then scan the tokens before it for anything code-shaped, then fill in the
+// name/credits either from the text itself (if present) or by looking the
+// code up in the app's own curriculum data. A code with no text-based name/
+// credits and no catalog match still gets included, just blank, so the
+// student can fill it in during review instead of the row silently vanishing.
 function parseResultScreenshotText(text) {
   const knownGrades = Object.keys(GRADE_POINTS); // O, A+, A, B+, B, C, RA
+  const courseInfoMap = buildCourseInfoMap();
   const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
   const rows = [];
 
   lines.forEach(line => {
     const tokens = line.split(/\s+/).filter(Boolean);
-    if (tokens.length < 3) return; // too short to plausibly be a subject row
+    if (tokens.length < 2) return; // too short to plausibly be a subject row
 
     // 1) Find the grade — check the last few tokens on the line for an exact match
     let gradeIdx = -1;
@@ -1882,38 +1942,43 @@ function parseResultScreenshotText(text) {
     if (gradeIdx === -1) return;
     const grade = tokens[gradeIdx].toUpperCase().replace(/[^A-Z+]/g, '');
 
-    // 2) Find credits — a standalone 0-10 number just before the grade
-    let creditsIdx = -1;
-    for (let i = gradeIdx - 1; i >= 0 && i >= gradeIdx - 3; i--) {
+    // 2) Find the subject code — scan every token before the grade (this also
+    // naturally skips a leading S.No / semester-number column, since plain
+    // numbers don't match the code shape)
+    let codeIdx = -1;
+    for (let i = 0; i < gradeIdx; i++) {
+      if (/^[A-Z]{2,4}\d{3,5}[A-Z]?$/i.test(tokens[i])) {
+        codeIdx = i;
+        break;
+      }
+    }
+    if (codeIdx === -1) return; // no recognizable course code on this line
+    const code = tokens[codeIdx].toUpperCase();
+
+    // 3) Credits, if the page happens to show them — a standalone 0-10 number
+    // between the code and the grade
+    let creditsTokenIdx = -1;
+    for (let i = gradeIdx - 1; i > codeIdx; i--) {
       const raw = tokens[i].replace(',', '.');
       if (/^\d+(\.\d+)?$/.test(raw)) {
         const num = parseFloat(raw);
         if (num >= 0 && num <= 10) {
-          creditsIdx = i;
+          creditsTokenIdx = i;
           break;
         }
       }
     }
-    if (creditsIdx === -1) return;
-    const credits = parseFloat(tokens[creditsIdx].replace(',', '.'));
+    const textCredits = creditsTokenIdx !== -1 ? parseFloat(tokens[creditsTokenIdx].replace(',', '.')) : null;
 
-    // 3) Subject code. Most result pages lead with a serial-number column
-    // (1, 2, 3...) before the actual code - skip a lone short leading number
-    // first, then check whether the next token looks like a real course code.
-    let code = "";
-    let scanIdx = 0;
-    if (/^\d{1,3}$/.test(tokens[0]) && tokens.length > 1) {
-      scanIdx = 1;
-    }
-    let nameStart = scanIdx;
-    if (scanIdx < creditsIdx && /^[A-Z]{2,4}\d{3,5}[A-Z]?$/i.test(tokens[scanIdx])) {
-      code = tokens[scanIdx].toUpperCase();
-      nameStart = scanIdx + 1;
-    }
+    // 4) Subject name, if the page happens to show it — whatever text sits
+    // between the code and the credits/grade column
+    const nameEndIdx = creditsTokenIdx !== -1 ? creditsTokenIdx : gradeIdx;
+    const textName = tokens.slice(codeIdx + 1, nameEndIdx).join(' ').trim();
 
-    // 4) Whatever remains between the code and the credits column is the subject name
-    const name = tokens.slice(nameStart, creditsIdx).join(' ').trim();
-    if (!name) return;
+    // 5) Fall back to the app's own curriculum data for whatever the page didn't show
+    const known = courseInfoMap[code];
+    const name = textName || (known ? known.name : '');
+    const credits = textCredits !== null ? textCredits : (known ? known.credits : '');
 
     rows.push({ code, name, credits, grade });
   });

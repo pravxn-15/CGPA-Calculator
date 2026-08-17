@@ -551,7 +551,12 @@
         <p id="ocr-empty-message" style="display: none; color: var(--text-secondary); text-align: center; padding: 20px 0;">
           Couldn't confidently detect any subject rows in that image. Try a clearer, cropped-to-the-table
           screenshot, or add your subjects manually.
+          <br><br>
+          <button type="button" id="ocr-toggle-raw-text" class="btn btn-outline" style="margin-top: 4px;">
+            Show What Was Read From The Image
+          </button>
         </p>
+        <pre id="ocr-raw-text" style="display: none; white-space: pre-wrap; word-break: break-word; font-size: 0.8rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px; max-height: 200px; overflow-y: auto; color: var(--text-secondary);"></pre>
       </div>
 
       <div class="ocr-modal-footer">
