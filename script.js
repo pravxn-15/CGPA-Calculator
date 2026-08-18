@@ -499,7 +499,7 @@ const SYLLABUS_PRESETS = {
     ]
   }
 };
-
+ 
 // --- Electives Lists ---
 const ELECTIVES = {
   PEC: {
@@ -940,7 +940,7 @@ const ELECTIVES = {
     { code: "MX3089", name: "Industrial Safety" }
   ]
 };
-
+ 
 // --- Grade Points Mapping ---
 const GRADE_POINTS = {
   "O": 10,
@@ -951,31 +951,31 @@ const GRADE_POINTS = {
   "C": 5,
   "RA": 0
 };
-
+ 
 // --- Active State Variables ---
 let activeTab = 'gpa'; // 'gpa' or 'cgpa'
 let currentGpaValue = 0;
 let currentGpaCredits = 0;
 let currentCgpaValue = 0;
-
+ 
 // --- DOM Cache ---
 const themeToggle = document.getElementById('theme-toggle');
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabPanes = document.querySelectorAll('.tab-pane');
 const tabIndicator = document.querySelector('.tab-indicator');
-
+ 
 // GPA elements
 const gpaTableBody = document.getElementById('gpa-table-body');
 const gpaAddRowBtn = document.getElementById('gpa-add-row');
 const gpaResetBtn = document.getElementById('gpa-reset');
 const gpaSendToCgpaBtn = document.getElementById('gpa-send-to-cgpa');
 const semesterPresetDropdown = document.getElementById('semester-preset');
-
+ 
 // CGPA elements
 const cgpaTableBody = document.getElementById('cgpa-table-body');
 const cgpaAddRowBtn = document.getElementById('cgpa-add-row');
 const cgpaResetBtn = document.getElementById('cgpa-reset');
-
+ 
 // Dashboard Elements
 const dashboardMetricTitle = document.getElementById('dashboard-metric-title');
 const dashboardMetricValue = document.getElementById('dashboard-metric-value');
@@ -984,7 +984,7 @@ const metricTotalCredits = document.getElementById('metric-total-credits');
 const metricEarnedCredits = document.getElementById('metric-earned-credits');
 const metricGradePoints = document.getElementById('metric-grade-points');
 const metricCgpaScore = document.getElementById('metric-cgpa-score');
-
+ 
 // PDF export elements
 const exportPdfBtn = document.getElementById('export-pdf-btn');
 const studentNameInput = document.getElementById('student-name');
@@ -992,7 +992,7 @@ const studentRollInput = document.getElementById('student-roll');
 const studentRegSelect = document.getElementById('student-reg');
 const studentDeptSelect = document.getElementById('student-dept');
 const studentCollegeInput = document.getElementById('student-college');
-
+ 
 // Screenshot Import (OCR) elements
 const ocrImportBtn = document.getElementById('ocr-import-btn');
 const ocrFileInput = document.getElementById('ocr-file-input');
@@ -1009,37 +1009,37 @@ const ocrToggleRawTextBtn = document.getElementById('ocr-toggle-raw-text');
 const ocrRawText = document.getElementById('ocr-raw-text');
 const ocrCancelBtn = document.getElementById('ocr-cancel-btn');
 const ocrConfirmBtn = document.getElementById('ocr-confirm-btn');
-
+ 
 let activeOcrWorker = null;
 let tesseractLoadPromise = null;
 let lastOcrRawText = '';
-
+ 
 // --- Initialization & Theme Setup ---
 document.addEventListener('DOMContentLoaded', () => {
   setupTheme();
   setupTabListeners();
   setupInitialRows();
   setupProfileCache();
-
+ 
   // Attach event listeners
   gpaAddRowBtn.addEventListener('click', () => addGpaRow());
   cgpaAddRowBtn.addEventListener('click', () => addCgpaRow());
-
+ 
   gpaResetBtn.addEventListener('click', resetGpaTable);
   cgpaResetBtn.addEventListener('click', resetCgpaTable);
-
+ 
   gpaSendToCgpaBtn.addEventListener('click', sendGpaToCgpa);
   semesterPresetDropdown.addEventListener('change', handlePresetChange);
-
+ 
   // Reload presets automatically if the user changes the department from the profile card
   studentDeptSelect.addEventListener('change', () => {
     if (semesterPresetDropdown.value) {
       handlePresetChange({ target: semesterPresetDropdown }, { forceConfirm: true });
     }
   });
-
+ 
   exportPdfBtn.addEventListener('click', generatePdfTranscript);
-
+ 
   // Screenshot import (OCR)
   ocrImportBtn.addEventListener('click', () => ocrFileInput.click());
   ocrFileInput.addEventListener('change', handleScreenshotUpload);
@@ -1054,42 +1054,42 @@ document.addEventListener('DOMContentLoaded', () => {
     ocrRawText.style.display = showing ? 'none' : 'block';
     ocrToggleRawTextBtn.textContent = showing ? 'Show What Was Read From The Image' : 'Hide Raw Text';
   });
-
+ 
   // Real-time calculation triggers
   gpaTableBody.addEventListener('input', calculateGpa);
   gpaTableBody.addEventListener('change', calculateGpa);
   cgpaTableBody.addEventListener('input', calculateCgpa);
   cgpaTableBody.addEventListener('change', calculateCgpa);
 });
-
+ 
 // Setup Dark/Light Theme
 function setupTheme() {
   const cachedTheme = localStorage.getItem('theme');
   const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
+ 
   if (cachedTheme === 'dark' || (!cachedTheme && systemPrefersDark)) {
     document.documentElement.classList.add('dark');
   } else {
     document.documentElement.classList.remove('dark');
   }
-
+ 
   themeToggle.addEventListener('click', () => {
     document.documentElement.classList.toggle('dark');
     const isDark = document.documentElement.classList.contains('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
 }
-
+ 
 // Setup Student Profile Caching (handles text fields and select inputs)
 function setupProfileCache() {
   const fields = ['student-name', 'student-roll', 'student-reg', 'student-dept', 'student-college'];
   fields.forEach(fieldId => {
     const el = document.getElementById(fieldId);
     if (!el) return;
-
+ 
     const cachedVal = localStorage.getItem(fieldId);
     if (cachedVal !== null) el.value = cachedVal;
-
+ 
     el.addEventListener('change', (e) => {
       localStorage.setItem(fieldId, e.target.value);
     });
@@ -1098,29 +1098,29 @@ function setupProfileCache() {
     });
   });
 }
-
+ 
 // Tab navigation control
 function setupTabListeners() {
   alignTabIndicator();
-
+ 
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       tabButtons.forEach(b => b.classList.remove('active'));
       tabPanes.forEach(p => p.classList.remove('active'));
-
+ 
       btn.classList.add('active');
       const tabName = btn.getAttribute('data-tab');
       document.getElementById(`${tabName}-pane`).classList.add('active');
       activeTab = tabName;
-
+ 
       alignTabIndicator();
       updateDashboardValues();
     });
   });
-
+ 
   window.addEventListener('resize', alignTabIndicator);
 }
-
+ 
 function alignTabIndicator() {
   const activeBtn = document.querySelector('.tab-btn.active');
   if (activeBtn && tabIndicator) {
@@ -1128,38 +1128,38 @@ function alignTabIndicator() {
     tabIndicator.style.left = `${activeBtn.offsetLeft}px`;
   }
 }
-
+ 
 // Setup standard starting rows based on the default selected department (CSE) Semester 1
 function setupInitialRows() {
   // GPA Table Defaults (CSE Semester 1 core subjects)
   addGpaRow("HS3152", "Professional English I", 3);
   addGpaRow("MA3151", "Matrices and Calculus", 4);
   addGpaRow("PH3151", "Engineering Physics", 3);
-
+ 
   // CGPA Table Defaults
   addCgpaRow("Semester 1", "", "");
   addCgpaRow("Semester 2", "", "");
-
+ 
   calculateGpa();
   calculateCgpa();
 }
-
+ 
 // --- GPA Calculator Functions ---
-
+ 
 // Add Row in GPA Table
 function addGpaRow(code = "", name = "", credits = "", isElective = false, electiveType = "", grade = "") {
   const tr = document.createElement('tr');
   tr.className = 'row-entry';
-
+ 
   const rowId = 'gpa-row-' + Math.random().toString(36).substr(2, 9);
   tr.id = rowId;
-
+ 
   // Subject Code HTML
   let codeHtml = `<input type="text" placeholder="E.g., CS3301" value="${code}" class="gpa-code-input" />`;
   if (isElective) {
     codeHtml = `<input type="text" placeholder="Select Subject" value="${code}" class="gpa-code-input" readonly />`;
   }
-
+ 
   // Subject Name HTML (supports Elective lists dropdown)
   let nameHtml = `<input type="text" placeholder="E.g., Data Structures" value="${name}" class="gpa-name-input" />`;
   if (isElective) {
@@ -1170,20 +1170,20 @@ function addGpaRow(code = "", name = "", credits = "", isElective = false, elect
     } else {
       options = ELECTIVES[electiveType] || [];
     }
-
+ 
     let optionsHtml = `<option value="" disabled selected>-- Select ${electiveType} --</option>`;
     options.forEach(opt => {
       const isSelected = (opt.name === name || opt.code === code) ? 'selected' : '';
       optionsHtml += `<option value="${opt.code}|${opt.name}" ${isSelected}>${opt.code} - ${opt.name}</option>`;
     });
-
+ 
     nameHtml = `
       <select class="gpa-name-input elective-select">
         ${optionsHtml}
       </select>
     `;
   }
-
+ 
   tr.innerHTML = `
     <td>${codeHtml}</td>
     <td>${nameHtml}</td>
@@ -1208,26 +1208,26 @@ function addGpaRow(code = "", name = "", credits = "", isElective = false, elect
       </button>
     </td>
   `;
-
+ 
   gpaTableBody.appendChild(tr);
-
+ 
   // Prefill grade if one was supplied (e.g. GRADE_POINTS-validated value from OCR import)
   if (grade && GRADE_POINTS.hasOwnProperty(grade)) {
     tr.querySelector('.gpa-grade-select').value = grade;
   }
-
+ 
   // Wire dynamic events
   const deleteBtn = tr.querySelector('.btn-delete');
   deleteBtn.addEventListener('click', () => removeGpaRow(rowId));
-
+ 
   const creditInput = tr.querySelector('.gpa-credit-input');
   creditInput.addEventListener('input', () => validateNumberField(creditInput, 0, 10));
-
+ 
   // Handle elective selection dropdown updates
   if (isElective) {
     const nameSelect = tr.querySelector('.gpa-name-input');
     const codeInput = tr.querySelector('.gpa-code-input');
-
+ 
     nameSelect.addEventListener('change', (e) => {
       const val = e.target.value;
       if (val) {
@@ -1239,7 +1239,7 @@ function addGpaRow(code = "", name = "", credits = "", isElective = false, elect
     });
   }
 }
-
+ 
 // Remove GPA Row with exit animation
 function removeGpaRow(rowId) {
   const tr = document.getElementById(rowId);
@@ -1251,7 +1251,7 @@ function removeGpaRow(rowId) {
     }, 300);
   }
 }
-
+ 
 // Reset GPA Calculator
 function resetGpaTable() {
   if (gpaTableBody.children.length === 0 || confirm("Are you sure you want to reset the GPA table? All entries will be removed.")) {
@@ -1260,18 +1260,18 @@ function resetGpaTable() {
     calculateGpa();
   }
 }
-
+ 
 // Handle preset syllabus load (combines selected Department & Semester)
 // opts.forceConfirm: pass true when calling this programmatically (e.g. a department
 // switch) so an already-filled table always prompts before being overwritten.
 function handlePresetChange(e, opts = {}) {
   const semNum = e.target.value;
   const currentDept = studentDeptSelect.value || 'cse';
-
+ 
   const presetCourses = SYLLABUS_PRESETS[currentDept] ? SYLLABUS_PRESETS[currentDept][semNum] : null;
-
+ 
   if (!presetCourses) return;
-
+ 
   // If there are rows already, always ask for confirmation before overwriting them
   if (gpaTableBody.children.length > 0) {
     if (!confirm(`Do you want to load preset for Semester ${semNum}? This will overwrite the current GPA calculator table.`)) {
@@ -1279,31 +1279,31 @@ function handlePresetChange(e, opts = {}) {
       return;
     }
   }
-
+ 
   gpaTableBody.innerHTML = "";
-
+ 
   presetCourses.forEach(c => {
     addGpaRow(c.code, c.name, c.credits, c.isElective, c.electiveType);
   });
-
+ 
   calculateGpa();
 }
-
+ 
 // --- CGPA Calculator Functions ---
-
+ 
 // Add Row in CGPA Table
 function addCgpaRow(semLabel = "", gpa = "", credits = "") {
   const tr = document.createElement('tr');
   tr.className = 'row-entry';
-
+ 
   const rowId = 'cgpa-row-' + Math.random().toString(36).substr(2, 9);
   tr.id = rowId;
-
+ 
   if (!semLabel) {
     const semIndex = cgpaTableBody.children.length + 1;
     semLabel = `Semester ${semIndex}`;
   }
-
+ 
   tr.innerHTML = `
     <td><input type="text" placeholder="E.g., Semester 1" value="${semLabel}" class="cgpa-sem-input" /></td>
     <td><input type="number" placeholder="GPA (0.00-10.00)" value="${gpa}" min="0" max="10" step="0.01" class="cgpa-gpa-input" /></td>
@@ -1316,20 +1316,20 @@ function addCgpaRow(semLabel = "", gpa = "", credits = "") {
       </button>
     </td>
   `;
-
+ 
   cgpaTableBody.appendChild(tr);
-
+ 
   // Wire dynamic events
   const deleteBtn = tr.querySelector('.btn-delete');
   deleteBtn.addEventListener('click', () => removeCgpaRow(rowId));
-
+ 
   const gpaInput = tr.querySelector('.cgpa-gpa-input');
   gpaInput.addEventListener('input', () => validateNumberField(gpaInput, 0, 10));
-
+ 
   const creditsInput = tr.querySelector('.cgpa-credits-input');
   creditsInput.addEventListener('input', () => validateNumberField(creditsInput, 1, 50));
 }
-
+ 
 // Remove CGPA Row with exit animation
 function removeCgpaRow(rowId) {
   const tr = document.getElementById(rowId);
@@ -1341,7 +1341,7 @@ function removeCgpaRow(rowId) {
     }, 300);
   }
 }
-
+ 
 // Reset CGPA Calculator
 function resetCgpaTable() {
   if (cgpaTableBody.children.length === 0 || confirm("Are you sure you want to reset the CGPA table? All entries will be removed.")) {
@@ -1349,21 +1349,21 @@ function resetCgpaTable() {
     calculateCgpa();
   }
 }
-
+ 
 // Bridge: Send current GPA table result to CGPA table
 function sendGpaToCgpa() {
   const isValid = validateGpaTable(true);
-
+ 
   if (!isValid) {
     alert("Please fix empty credits or grade fields before transferring!");
     return;
   }
-
+ 
   if (currentGpaValue <= 0 || currentGpaCredits <= 0) {
     alert("Please input grades and credits to obtain a valid GPA before transferring.");
     return;
   }
-
+ 
   let semLabel = "";
   const selectedSem = semesterPresetDropdown.value;
   if (selectedSem) {
@@ -1372,7 +1372,7 @@ function sendGpaToCgpa() {
     const index = cgpaTableBody.children.length + 1;
     semLabel = `Semester ${index}`;
   }
-
+ 
   let rowToUpdate = null;
   const semInputs = cgpaTableBody.querySelectorAll('.cgpa-sem-input');
   semInputs.forEach(input => {
@@ -1380,7 +1380,7 @@ function sendGpaToCgpa() {
       rowToUpdate = input.closest('tr');
     }
   });
-
+ 
   if (rowToUpdate) {
     if (confirm(`${semLabel} already exists in your CGPA table. Do you want to update it with GPA: ${currentGpaValue.toFixed(2)} and Credits: ${currentGpaCredits}?`)) {
       rowToUpdate.querySelector('.cgpa-gpa-input').value = currentGpaValue.toFixed(2);
@@ -1396,7 +1396,7 @@ function sendGpaToCgpa() {
     highlightPaneTransition('cgpa');
   }
 }
-
+ 
 function highlightPaneTransition(targetTab) {
   const targetBtn = document.querySelector(`.tab-btn[data-tab="${targetTab}"]`);
   if (targetBtn) {
@@ -1409,9 +1409,9 @@ function highlightPaneTransition(targetTab) {
     }, 50);
   }
 }
-
+ 
 // --- Validation Handlers ---
-
+ 
 function validateNumberField(input, min, max) {
   const val = parseFloat(input.value);
   if (isNaN(val)) {
@@ -1424,16 +1424,16 @@ function validateNumberField(input, min, max) {
     input.classList.remove('validation-error');
   }
 }
-
+ 
 function validateGpaTable(highlight = false) {
   let isValid = true;
   const rows = gpaTableBody.querySelectorAll('tr');
-
+ 
   rows.forEach(tr => {
     const creditInput = tr.querySelector('.gpa-credit-input');
     const gradeSelect = tr.querySelector('.gpa-grade-select');
     const nameInput = tr.querySelector('.gpa-name-input');
-
+ 
     // Check credit field
     const creditVal = parseFloat(creditInput.value);
     if (isNaN(creditVal) || creditVal < 0) {
@@ -1445,7 +1445,7 @@ function validateGpaTable(highlight = false) {
     } else {
       creditInput.classList.remove('validation-error');
     }
-
+ 
     // Check grade selector
     if (!gradeSelect.value) {
       isValid = false;
@@ -1456,7 +1456,7 @@ function validateGpaTable(highlight = false) {
     } else {
       gradeSelect.classList.remove('validation-error');
     }
-
+ 
     // Check elective dropdown completion
     if (nameInput.classList.contains('elective-select') && !nameInput.value) {
       isValid = false;
@@ -1468,18 +1468,18 @@ function validateGpaTable(highlight = false) {
       nameInput.classList.remove('validation-error');
     }
   });
-
+ 
   return isValid;
 }
-
+ 
 function validateCgpaTable(highlight = false) {
   let isValid = true;
   const rows = cgpaTableBody.querySelectorAll('tr');
-
+ 
   rows.forEach(tr => {
     const gpaInput = tr.querySelector('.cgpa-gpa-input');
     const creditsInput = tr.querySelector('.cgpa-credits-input');
-
+ 
     // Validate GPA
     const gpaVal = parseFloat(gpaInput.value);
     if (isNaN(gpaVal) || gpaVal < 0 || gpaVal > 10) {
@@ -1491,7 +1491,7 @@ function validateCgpaTable(highlight = false) {
     } else {
       gpaInput.classList.remove('validation-error');
     }
-
+ 
     // Validate Credits
     const creditsVal = parseFloat(creditsInput.value);
     if (isNaN(creditsVal) || creditsVal <= 0) {
@@ -1504,86 +1504,86 @@ function validateCgpaTable(highlight = false) {
       creditsInput.classList.remove('validation-error');
     }
   });
-
+ 
   return isValid;
 }
-
+ 
 function shakeElement(el) {
   el.classList.remove('validation-error');
   void el.offsetWidth;
   el.classList.add('validation-error');
 }
-
+ 
 // --- Calculation Math ---
-
+ 
 function calculateGpa() {
   const rows = gpaTableBody.querySelectorAll('tr');
   let totalCredits = 0;
   let earnedCredits = 0;
   let totalGradePoints = 0;
-
+ 
   rows.forEach(tr => {
     const creditInput = tr.querySelector('.gpa-credit-input');
     const gradeSelect = tr.querySelector('.gpa-grade-select');
-
+ 
     const credits = parseFloat(creditInput.value);
     const grade = gradeSelect.value;
-
+ 
     if (!isNaN(credits) && credits >= 0 && grade) {
       totalCredits += credits;
       const pt = GRADE_POINTS[grade];
       totalGradePoints += (credits * pt);
-
+ 
       // Earned credits exclude RA subjects and subjects with 0 credits
       if (grade !== "RA" && pt >= 0) {
         earnedCredits += credits;
       }
     }
   });
-
+ 
   currentGpaCredits = earnedCredits;
   currentGpaValue = totalCredits > 0 ? (totalGradePoints / totalCredits) : 0;
-
+ 
   if (activeTab === 'gpa') {
     updateDashboardValues();
   }
 }
-
+ 
 function calculateCgpa() {
   const rows = cgpaTableBody.querySelectorAll('tr');
   let totalCredits = 0;
   let totalPoints = 0;
-
+ 
   rows.forEach(tr => {
     const gpaInput = tr.querySelector('.cgpa-gpa-input');
     const creditsInput = tr.querySelector('.cgpa-credits-input');
-
+ 
     const gpa = parseFloat(gpaInput.value);
     const credits = parseFloat(creditsInput.value);
-
+ 
     if (!isNaN(gpa) && gpa >= 0 && !isNaN(credits) && credits > 0) {
       totalCredits += credits;
       totalPoints += (gpa * credits);
     }
   });
-
+ 
   currentCgpaValue = totalCredits > 0 ? (totalPoints / totalCredits) : 0;
-
+ 
   if (activeTab === 'cgpa') {
     updateDashboardValues();
   }
 }
-
+ 
 function updateDashboardValues() {
   let score = 0;
   let scoreText = "0.00";
-
+ 
   // Fetch active summary for GPA
   const gpaRows = gpaTableBody.querySelectorAll('tr');
   let gpaTotalCredits = 0;
   let gpaEarnedCredits = 0;
   let gpaTotalGradePoints = 0;
-
+ 
   gpaRows.forEach(tr => {
     const cr = parseFloat(tr.querySelector('.gpa-credit-input').value);
     const gr = tr.querySelector('.gpa-grade-select').value;
@@ -1593,12 +1593,12 @@ function updateDashboardValues() {
       if (gr !== "RA") gpaEarnedCredits += cr;
     }
   });
-
+ 
   // Fetch active summary for CGPA
   const cgpaRows = cgpaTableBody.querySelectorAll('tr');
   let cgpaTotalCredits = 0;
   let cgpaWeightedPoints = 0;
-
+ 
   cgpaRows.forEach(tr => {
     const gp = parseFloat(tr.querySelector('.cgpa-gpa-input').value);
     const cr = parseFloat(tr.querySelector('.cgpa-credits-input').value);
@@ -1607,14 +1607,14 @@ function updateDashboardValues() {
       cgpaWeightedPoints += (gp * cr);
     }
   });
-
+ 
   const computedCgpa = cgpaTotalCredits > 0 ? (cgpaWeightedPoints / cgpaTotalCredits) : 0;
-
+ 
   metricTotalCredits.textContent = activeTab === 'gpa' ? gpaTotalCredits.toFixed(1) : cgpaTotalCredits.toFixed(1);
   metricEarnedCredits.textContent = activeTab === 'gpa' ? gpaEarnedCredits.toFixed(1) : cgpaTotalCredits.toFixed(1);
   metricGradePoints.textContent = activeTab === 'gpa' ? gpaTotalGradePoints.toFixed(1) : cgpaWeightedPoints.toFixed(1);
   metricCgpaScore.textContent = computedCgpa.toFixed(2);
-
+ 
   if (activeTab === 'gpa') {
     dashboardMetricTitle.textContent = "GPA";
     score = gpaTotalCredits > 0 ? (gpaTotalGradePoints / gpaTotalCredits) : 0;
@@ -1624,57 +1624,57 @@ function updateDashboardValues() {
     score = computedCgpa;
     scoreText = score.toFixed(2);
   }
-
+ 
   dashboardMetricValue.textContent = scoreText;
-
+ 
   // Update circle gauge progress ring
   const progressPercent = Math.min(Math.max(score / 10, 0), 1);
   const offset = 264 - (progressPercent * 264);
   radialProgressBar.style.strokeDashoffset = offset;
 }
-
+ 
 // --- PDF Generation & Transcript Construction ---
-
+ 
 function generatePdfTranscript() {
   const isGpaValid = validateGpaTable(true);
   const isCgpaValid = validateCgpaTable(true);
-
+ 
   if (!isGpaValid || !isCgpaValid) {
     alert("Please fix validation errors (highlighted in red) in the tables before exporting!");
     return;
   }
-
+ 
   const sName = studentNameInput.value.trim() || "John Doe";
   const sRoll = studentRollInput.value.trim() || "N/A";
   const sCollege = studentCollegeInput.value.trim() || "N/A";
-
+ 
   // Retrieve display labels for Department and Regulation select options
   const sDeptText = studentDeptSelect.options[studentDeptSelect.selectedIndex].text;
   const sRegText = studentRegSelect.options[studentRegSelect.selectedIndex].text;
-
+ 
   // Populate student details into template
   document.getElementById('pdf-student-name').textContent = sName;
   document.getElementById('pdf-student-roll').textContent = sRoll;
   document.getElementById('pdf-student-reg').textContent = sRegText;
   document.getElementById('pdf-student-dept').textContent = sDeptText;
   document.getElementById('pdf-student-college').textContent = sCollege;
-
+ 
   const now = new Date();
   document.getElementById('pdf-gen-date').textContent = "Date Generated: " + now.toLocaleDateString() + " " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
+ 
   // Load and calculate final metrics for the PDF top boxes
   const gpaRows = gpaTableBody.querySelectorAll('tr');
   let gpaTotalCredits = 0;
   let gpaEarnedCredits = 0;
   let gpaTotalGradePoints = 0;
-
+ 
   const pdfGpaBody = document.getElementById('pdf-gpa-table-body');
   pdfGpaBody.innerHTML = "";
-
+ 
   gpaRows.forEach(tr => {
     let code = tr.querySelector('.gpa-code-input').value.trim();
     let name = "";
-
+ 
     const nameEl = tr.querySelector('.gpa-name-input');
     if (nameEl.tagName === 'SELECT') {
       const selectVal = nameEl.value;
@@ -1688,15 +1688,15 @@ function generatePdfTranscript() {
     } else {
       name = nameEl.value.trim();
     }
-
+ 
     const credits = parseFloat(tr.querySelector('.gpa-credit-input').value);
     const grade = tr.querySelector('.gpa-grade-select').value;
-
+ 
     if (!isNaN(credits) && credits >= 0 && grade) {
       gpaTotalCredits += credits;
       gpaTotalGradePoints += (credits * GRADE_POINTS[grade]);
       if (grade !== "RA") gpaEarnedCredits += credits;
-
+ 
       const pdfTr = document.createElement('tr');
       const cells = [code || "N/A", name || "N/A", credits.toFixed(1), grade];
       cells.forEach((val, i) => {
@@ -1708,32 +1708,32 @@ function generatePdfTranscript() {
       pdfGpaBody.appendChild(pdfTr);
     }
   });
-
+ 
   const finalGpaVal = gpaTotalCredits > 0 ? (gpaTotalGradePoints / gpaTotalCredits) : 0;
   document.getElementById('pdf-gpa-val').textContent = finalGpaVal.toFixed(2);
   document.getElementById('pdf-total-credits-val').textContent = gpaTotalCredits.toFixed(1);
   document.getElementById('pdf-earned-credits-val').textContent = gpaEarnedCredits.toFixed(1);
-
+ 
   const pdfGpaSection = document.getElementById('pdf-gpa-section');
   pdfGpaSection.style.display = gpaRows.length === 0 ? 'none' : 'block';
-
+ 
   // Populate CGPA records
   const cgpaRows = cgpaTableBody.querySelectorAll('tr');
   let cgpaTotalCredits = 0;
   let cgpaTotalPoints = 0;
-
+ 
   const pdfCgpaBody = document.getElementById('pdf-cgpa-table-body');
   pdfCgpaBody.innerHTML = "";
-
+ 
   cgpaRows.forEach(tr => {
     const sem = tr.querySelector('.cgpa-sem-input').value.trim();
     const gpa = parseFloat(tr.querySelector('.cgpa-gpa-input').value);
     const credits = parseFloat(tr.querySelector('.cgpa-credits-input').value);
-
+ 
     if (!isNaN(gpa) && gpa >= 0 && !isNaN(credits) && credits > 0) {
       cgpaTotalCredits += credits;
       cgpaTotalPoints += (gpa * credits);
-
+ 
       const pdfTr = document.createElement('tr');
       [sem || "N/A", gpa.toFixed(2), credits.toFixed(1)].forEach(val => {
         const td = document.createElement('td');
@@ -1743,15 +1743,15 @@ function generatePdfTranscript() {
       pdfCgpaBody.appendChild(pdfTr);
     }
   });
-
+ 
   const finalCgpaVal = cgpaTotalCredits > 0 ? (cgpaTotalPoints / cgpaTotalCredits) : 0;
   document.getElementById('pdf-cgpa-val').textContent = finalCgpaVal.toFixed(2);
-
+ 
   const pdfCgpaSection = document.getElementById('pdf-cgpa-section');
   pdfCgpaSection.style.display = cgpaRows.length === 0 ? 'none' : 'block';
-
+ 
   const printElement = document.getElementById('print-transcript-template');
-
+ 
   const opt = {
     margin: [12, 12, 12, 12],
     filename: `${sName.replace(/\s+/g, '_')}_Transcript_Report.pdf`,
@@ -1759,9 +1759,9 @@ function generatePdfTranscript() {
     html2canvas: { scale: 2, useCORS: true, logging: false },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
   };
-
+ 
   printElement.style.display = 'block';
-
+ 
   html2pdf()
     .from(printElement)
     .set(opt)
@@ -1775,7 +1775,7 @@ function generatePdfTranscript() {
       alert("Failed to export PDF. Please check that your input data is valid and try again.");
     });
 }
-
+ 
 // --- Screenshot Import (OCR) ---
 // Lets a student upload a screenshot of their university result page and
 // auto-fills the GPA table by running client-side OCR (Tesseract.js, loaded
@@ -1783,15 +1783,15 @@ function generatePdfTranscript() {
 // recognized text. Because OCR is never perfect, detected rows are always
 // shown in a review step (with every field editable, and a checkbox to skip
 // rows) before anything is written into the real GPA table.
-
+ 
 const OCR_CDN_URL = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
-
+ 
 // Load the Tesseract.js library from CDN the first time it's needed, instead
 // of on every page load, to keep the app's normal startup light.
 function ensureTesseractLoaded() {
   if (window.Tesseract) return Promise.resolve();
   if (tesseractLoadPromise) return tesseractLoadPromise;
-
+ 
   tesseractLoadPromise = new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.src = OCR_CDN_URL;
@@ -1802,35 +1802,35 @@ function ensureTesseractLoaded() {
     };
     document.head.appendChild(script);
   });
-
+ 
   return tesseractLoadPromise;
 }
-
+ 
 function openOcrModal() {
   ocrModalOverlay.style.display = 'flex';
 }
-
+ 
 function closeOcrModal() {
   ocrModalOverlay.style.display = 'none';
   ocrFileInput.value = ''; // allow re-selecting the same file next time
   ocrRawText.style.display = 'none';
   ocrToggleRawTextBtn.textContent = 'Show What Was Read From The Image';
-
+ 
   if (activeOcrWorker) {
     activeOcrWorker.terminate().catch(() => {});
     activeOcrWorker = null;
   }
 }
-
+ 
 function setOcrStatus(text, progressPercent) {
   ocrStatusText.textContent = text;
   ocrProgressFill.style.width = Math.min(Math.max(progressPercent, 0), 100) + '%';
 }
-
+ 
 async function handleScreenshotUpload(e) {
   const file = e.target.files && e.target.files[0];
   if (!file) return;
-
+ 
   openOcrModal();
   ocrStatusSection.style.display = 'flex';
   ocrResultsSection.style.display = 'none';
@@ -1838,39 +1838,79 @@ async function handleScreenshotUpload(e) {
   ocrRawText.style.display = 'none';
   ocrToggleRawTextBtn.textContent = 'Show What Was Read From The Image';
   setOcrStatus('Loading OCR engine\u2026', 0);
-
+ 
   try {
     await ensureTesseractLoaded();
     setOcrStatus('Warming up the OCR engine\u2026', 8);
-
+ 
+    let currentAttemptStatusText = 'Reading the screenshot\u2026';
+    let currentAttemptBaseProgress = 10;
+ 
     activeOcrWorker = await Tesseract.createWorker('eng', 1, {
       logger: (m) => {
         if (m.status === 'recognizing text' && typeof m.progress === 'number') {
-          setOcrStatus('Reading the screenshot\u2026', 15 + m.progress * 80);
+          setOcrStatus(currentAttemptStatusText, currentAttemptBaseProgress + m.progress * 25);
         }
       }
     });
-
-    const { data: { text } } = await activeOcrWorker.recognize(file);
+ 
+    // Bordered/grid-line tables (like a university result page) are a known
+    // weak spot for Tesseract's default automatic page-layout analysis - it
+    // can misjudge the table as a non-text region and skip every row inside
+    // it while still reading the plain text around it fine. If the default
+    // pass finds nothing, retry with segmentation modes built for exactly
+    // this kind of dense, gridded content before giving up.
+    const psm = (window.Tesseract && window.Tesseract.PSM) || {};
+    const attempts = [
+      { label: 'Reading the screenshot\u2026', params: null },
+      { label: 'Trying an alternate reading mode\u2026', params: { tessedit_pageseg_mode: psm.SINGLE_BLOCK !== undefined ? psm.SINGLE_BLOCK : 6 } },
+      { label: 'Trying one more reading mode\u2026', params: { tessedit_pageseg_mode: psm.SPARSE_TEXT !== undefined ? psm.SPARSE_TEXT : 11 } }
+    ];
+ 
+    let bestRows = [];
+    let bestText = '';
+ 
+    for (let i = 0; i < attempts.length; i++) {
+      currentAttemptStatusText = attempts[i].label;
+      currentAttemptBaseProgress = 10 + i * 28;
+      setOcrStatus(currentAttemptStatusText, currentAttemptBaseProgress);
+ 
+      if (attempts[i].params) {
+        await activeOcrWorker.setParameters(attempts[i].params);
+      }
+      const { data: { text } } = await activeOcrWorker.recognize(file);
+      const rows = parseResultScreenshotText(text);
+ 
+      // Keep whichever attempt produced the most substantial raw text, even
+      // if it didn't parse into rows - that's what the "Show What Was Read"
+      // fallback needs when every mode strikes out.
+      if (text && text.length > bestText.length) {
+        bestText = text;
+      }
+      if (rows.length > bestRows.length) {
+        bestRows = rows;
+      }
+      if (bestRows.length > 0) break; // good enough - no need to try further modes
+    }
+ 
     await activeOcrWorker.terminate();
     activeOcrWorker = null;
-
-    setOcrStatus('Parsing detected subjects\u2026', 100);
-    const rows = parseResultScreenshotText(text);
-
-    lastOcrRawText = text;
-    ocrRawText.textContent = text.trim() || '(No text was recognized in that image.)';
-
+ 
+    setOcrStatus('Parsing detected subjects\u2026', 98);
+ 
+    lastOcrRawText = bestText;
+    ocrRawText.textContent = bestText.trim() || '(No text was recognized in that image.)';
+ 
     ocrStatusSection.style.display = 'none';
     ocrResultsSection.style.display = 'block';
-    renderOcrPreviewRows(rows);
+    renderOcrPreviewRows(bestRows);
   } catch (err) {
     console.error('OCR failed:', err);
     activeOcrWorker = null;
     setOcrStatus(err.message || "Something went wrong reading that image. Try a clearer screenshot, or add subjects manually.", 0);
   }
 }
-
+ 
 // Builds a { CODE: { name, credits } } lookup from the app's own curriculum
 // data (core courses in SYLLABUS_PRESETS + elective catalogs in ELECTIVES),
 // so a code detected on a result page can be auto-filled with its name and
@@ -1878,7 +1918,7 @@ async function handleScreenshotUpload(e) {
 // normal case for Anna University's own result portal.
 function buildCourseInfoMap() {
   const map = {};
-
+ 
   Object.values(SYLLABUS_PRESETS).forEach(deptPresets => {
     Object.values(deptPresets).forEach(semList => {
       semList.forEach(course => {
@@ -1888,7 +1928,7 @@ function buildCourseInfoMap() {
       });
     });
   });
-
+ 
   // Elective catalogs only store {code, name} - credit value follows the
   // fixed convention for that slot type (matches SYLLABUS_PRESETS slots above)
   const electiveCredits = {
@@ -1907,10 +1947,10 @@ function buildCourseInfoMap() {
       Object.values(entry).forEach(addAll);
     }
   });
-
+ 
   return map;
 }
-
+ 
 // Heuristic parser for a university result-page screenshot. Deliberately
 // does NOT require a credits or subject-name column in the text, because
 // Anna University's own result portal only shows Semester | Subject Code |
@@ -1925,11 +1965,11 @@ function parseResultScreenshotText(text) {
   const courseInfoMap = buildCourseInfoMap();
   const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
   const rows = [];
-
+ 
   lines.forEach(line => {
     const tokens = line.split(/\s+/).filter(Boolean);
     if (tokens.length < 2) return; // too short to plausibly be a subject row
-
+ 
     // 1) Find the grade — check the last few tokens on the line for an exact match
     let gradeIdx = -1;
     for (let i = tokens.length - 1; i >= 0 && i >= tokens.length - 3; i--) {
@@ -1941,7 +1981,7 @@ function parseResultScreenshotText(text) {
     }
     if (gradeIdx === -1) return;
     const grade = tokens[gradeIdx].toUpperCase().replace(/[^A-Z+]/g, '');
-
+ 
     // 2) Find the subject code — scan every token before the grade (this also
     // naturally skips a leading S.No / semester-number column, since plain
     // numbers don't match the code shape)
@@ -1954,7 +1994,7 @@ function parseResultScreenshotText(text) {
     }
     if (codeIdx === -1) return; // no recognizable course code on this line
     const code = tokens[codeIdx].toUpperCase();
-
+ 
     // 3) Credits, if the page happens to show them — a standalone 0-10 number
     // between the code and the grade
     let creditsTokenIdx = -1;
@@ -1969,40 +2009,40 @@ function parseResultScreenshotText(text) {
       }
     }
     const textCredits = creditsTokenIdx !== -1 ? parseFloat(tokens[creditsTokenIdx].replace(',', '.')) : null;
-
+ 
     // 4) Subject name, if the page happens to show it — whatever text sits
     // between the code and the credits/grade column
     const nameEndIdx = creditsTokenIdx !== -1 ? creditsTokenIdx : gradeIdx;
     const textName = tokens.slice(codeIdx + 1, nameEndIdx).join(' ').trim();
-
+ 
     // 5) Fall back to the app's own curriculum data for whatever the page didn't show
     const known = courseInfoMap[code];
     const name = textName || (known ? known.name : '');
     const credits = textCredits !== null ? textCredits : (known ? known.credits : '');
-
+ 
     rows.push({ code, name, credits, grade });
   });
-
+ 
   return rows;
 }
-
+ 
 function renderOcrPreviewRows(rows) {
   ocrPreviewTableBody.innerHTML = '';
-
+ 
   if (rows.length === 0) {
     ocrPreviewTable.style.display = 'none';
     ocrEmptyMessage.style.display = 'block';
     ocrConfirmBtn.style.display = 'none';
     return;
   }
-
+ 
   ocrPreviewTable.style.display = '';
   ocrEmptyMessage.style.display = 'none';
   ocrConfirmBtn.style.display = '';
-
+ 
   rows.forEach(row => {
     const tr = document.createElement('tr');
-
+ 
     const includeTd = document.createElement('td');
     const includeCb = document.createElement('input');
     includeCb.type = 'checkbox';
@@ -2012,21 +2052,21 @@ function renderOcrPreviewRows(rows) {
       tr.classList.toggle('ocr-row-excluded', !includeCb.checked);
     });
     includeTd.appendChild(includeCb);
-
+ 
     const codeTd = document.createElement('td');
     const codeInput = document.createElement('input');
     codeInput.type = 'text';
     codeInput.className = 'ocr-code-input';
     codeInput.value = row.code;
     codeTd.appendChild(codeInput);
-
+ 
     const nameTd = document.createElement('td');
     const nameInput = document.createElement('input');
     nameInput.type = 'text';
     nameInput.className = 'ocr-name-input';
     nameInput.value = row.name;
     nameTd.appendChild(nameInput);
-
+ 
     const creditsTd = document.createElement('td');
     const creditsInput = document.createElement('input');
     creditsInput.type = 'number';
@@ -2036,7 +2076,7 @@ function renderOcrPreviewRows(rows) {
     creditsInput.className = 'ocr-credits-input';
     creditsInput.value = row.credits;
     creditsTd.appendChild(creditsInput);
-
+ 
     const gradeTd = document.createElement('td');
     const gradeSelect = document.createElement('select');
     gradeSelect.className = 'ocr-grade-select';
@@ -2048,33 +2088,34 @@ function renderOcrPreviewRows(rows) {
       gradeSelect.appendChild(opt);
     });
     gradeTd.appendChild(gradeSelect);
-
+ 
     tr.append(includeTd, codeTd, nameTd, creditsTd, gradeTd);
     ocrPreviewTableBody.appendChild(tr);
   });
 }
-
+ 
 function handleOcrConfirm() {
   const rows = ocrPreviewTableBody.querySelectorAll('tr');
   let addedCount = 0;
-
+ 
   rows.forEach(tr => {
     if (!tr.querySelector('.ocr-row-include').checked) return;
-
+ 
     const code = tr.querySelector('.ocr-code-input').value.trim();
     const name = tr.querySelector('.ocr-name-input').value.trim();
     const credits = tr.querySelector('.ocr-credits-input').value;
     const grade = tr.querySelector('.ocr-grade-select').value;
-
+ 
     if (!name && !code) return;
-
+ 
     addGpaRow(code, name, credits, false, "", grade);
     addedCount++;
   });
-
+ 
   if (addedCount > 0) {
     calculateGpa();
   }
-
+ 
   closeOcrModal();
 }
+ 
